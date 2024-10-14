@@ -13,6 +13,10 @@ export class AppClass {
         this.campId = sessionData('read', 'campId')
     }
 
+    async addSubCamp(obj){
+        await axiosCall('PUT', `${this.link}/api/addsubcamp/${this.campId}`, obj)
+    }
+
     async updateGeneralSettings(obj){
         await axiosCall('PUT', `${this.link}/api/updategeneralsettings/${this.campId}`, obj)
     }

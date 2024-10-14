@@ -14,6 +14,12 @@ export class CampsController {
     // }
 
     @UseGuards(JwtAuthGuard)
+    @Put('/addsubcamp/:campId')
+    addSubCamp(@Param('campId') campId: string, @Body() obj: object, @Request() req: any){
+        this.campsService.addSubCamp(campId, obj, req.user._id)
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Get('/getmycamps')
     getUsersCamps(@Request() req: any){
         return this.campsService.getUsersCamps(req.user.email)

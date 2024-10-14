@@ -16,7 +16,7 @@ export function HeaderSearch3(props) {
               style={{width: '50vmax', marginLeft: '0.18vmax'}}
               placeholder="Search"
               leftSection={<IconSearch style={{ width: '1vmax', height: '1vmax' }} stroke={1.5} />}
-              data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
+              data={[]}
               visibleFrom="xs"
               onChange={props.setTextFilter}
             />

@@ -33,6 +33,7 @@ function MainPage() {
   const [textFilter, setTextFilter] = useState(false)
   const [value, setValue] = useState('');
   const [orders, setOrders] = useState([])
+  const [subCamp, setSubCamp] = useState('')
 
   const app = new AppClass()
 
@@ -139,7 +140,7 @@ function MainPage() {
         <SettingsScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
         <GroupUsersScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
         <AdminScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
-        <OwnerScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
+        <OwnerScreen app={app} text={text} subCamp={subCamp} setSubCamp={setSubCamp}/>,
       ]
       if(listScreens.length !== navBar.top.length){
         console.log('Какойто пиздец, Навбаров не столько сколько скринов!!!')

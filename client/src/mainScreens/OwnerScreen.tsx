@@ -1,14 +1,17 @@
 import React from "react"
 import { LoaderItem } from "../components/Loader/LoaderItem.tsx"
 import { SettingsItem } from "../components/SettingsItem/SettingsItem.tsx"
-import { CampSettings } from "./settingsItems/CampSettings.tsx"
+import { OwnerSettings } from "./settingsItems/OwnerSettings.tsx"
 
 export const OwnerScreen = (props: any) => {
+    // console.log(props)
 
     if(props){
        return (
             <div>
-                <SettingsItem title={props.text.CampSettings} body={<CampSettings serviceSettings={props.serviceSettings} setServiceSettings={props.setServiceSettings}/>}/>
+                <SettingsItem 
+                title={props.text.CampSettings} 
+                body={<OwnerSettings {...props} />}/>
             </div>
         ) 
     }

@@ -17,6 +17,17 @@ export class CampsService {
         const order = await this.campModel.create(dto)
         return order
     }
+
+    async addSubCamp(campId: string, obj: object, id: number){
+        console.log(obj)
+        const res = await this.campModel.findOne({_id: obj['id']})
+        console.log(res)
+        // if(res){
+        //    await this.campModel.updateOne({_id: campId, owner: id}, {$addToSet: {subcamp: obj['id']}}) 
+        // }
+        
+    }
+
     async getCampsByOwnerEmail(user: any){
         const camps = await this.campModel.find({users: {$elemMatch: {email: user.email}}})
         return camps.map(item => item._id)
