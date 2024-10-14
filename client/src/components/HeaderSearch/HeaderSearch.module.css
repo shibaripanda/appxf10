@@ -1,0 +1,50 @@
+.header {
+    height: 2.5vmax;
+    width: calc(99vw - 5vmax);
+    background-color: var(--mantine-color-body);
+    border-bottom: 0.0625vmax solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    padding-left: var(--mantine-spacing-md);
+    padding-right: var(--mantine-spacing-md);
+  }
+  
+  .inner {
+    height: 2.5vmax;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .link {
+    cursor: pointer;
+    display: block;
+    line-height: 1;
+    padding: 0.5vmax 0.75vmax;
+    border-radius: var(--mantine-radius-sm);
+    text-decoration: none;
+    color: rgb(194, 194, 194);
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 900;
+
+    &:hover {
+      color: rgb(10, 113, 231);
+      font-weight: 900;
+    }
+  }
+
+  .activlink {
+    cursor: pointer;
+    display: block;
+    line-height: 1;
+    padding: 0.5vmax 0.75vmax;
+    border-radius: var(--mantine-radius-sm);
+    text-decoration: none;
+    color: rgb(0, 0, 0); 
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 900;
+    /* text-decoration: underline; */
+
+    &:hover {
+      color: rgb(10, 113, 231);
+      font-weight: 900;
+    }
+  }

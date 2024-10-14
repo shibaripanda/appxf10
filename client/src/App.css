@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 0px
+}
+
+#root {
+  display: flex;
+  justify-content: flex-start;
+  width: 99vw;
+  height: 100vh;
+}
+
+.NavBar {
+  position: fixed;
+}
+
+.NavBarTop {
+  position: fixed;
+}
+
+.NavBarTop2 {
+  margin-left: 5vmax;
+}
+
+.WorkScreen {
+  width: calc(99vw - 5vmax);
+  position: absolute;
+  margin-top: 9vmax;
+  /* margin-top: 3.5vmax; */
+  margin-left: 5vmax;
+}
+
+.mainScreenLoader {
+  margin: 3vmax;
+  display: flex;
+  justify-content: center;
+}
+
+.orderOpenMenu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.orderButtons {
+  margin: 0.5vmax
+}
+
+.table {
+  font-size: 12px;
+}
+
+.App {
+  width:  800px;
+}
+
+.create-line {
+  width: 360px;
+  border-top: 1px solid #000000;
+}
+
+.perenos {
+  white-space: pre-wrap;
+}
+
+.vertical span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.print-agreement {
+  margin: 19px;
+}
