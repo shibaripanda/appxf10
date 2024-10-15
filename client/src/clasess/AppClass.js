@@ -14,7 +14,15 @@ export class AppClass {
     }
 
     async addSubCamp(obj){
-        await axiosCall('PUT', `${this.link}/api/addsubcamp/${this.campId}`, obj)
+        await axiosCall('PUT', `${this.link}/api/deletesubcamp/${this.campId}`, obj)
+    }
+
+    async deleteSubCamp(obj){
+        await axiosCall('PUT', `${this.link}/api/deletesubcamp/${this.campId}`, obj)
+    }
+
+    async getMySubs(){
+        return (await axiosCall('GET', `${this.link}/api/getmysubs/${this.campId}`)).data
     }
 
     async updateGeneralSettings(obj){

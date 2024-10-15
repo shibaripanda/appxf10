@@ -4,7 +4,6 @@ import { SettingsItem } from "../components/SettingsItem/SettingsItem.tsx"
 import { OwnerSettings } from "./settingsItems/OwnerSettings.tsx"
 
 export const OwnerScreen = (props: any) => {
-    // console.log(props)
 
     if(props){
        return (

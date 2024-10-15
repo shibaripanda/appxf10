@@ -31,7 +31,7 @@ function MainPage() {
   const [serviceSettings, setServiceSettings] = useState(false)
   const [newSet, setNewSet] = useState(false)
   const [textFilter, setTextFilter] = useState(false)
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('')
   const [orders, setOrders] = useState([])
   const [subCamp, setSubCamp] = useState('')
 
@@ -53,14 +53,16 @@ function MainPage() {
     return obj
   }
   createLisener('createNewOrder', async (data) => {
-    await app.greateOrder({...data.newOrder})
+    console.log(data.newOrder)
+    await app.greateOrder({...data.newOrder, complect: data.newOrder.complect.join(', '), view: data.newOrder.view.join(', ')})
     .then(async (res) => {
       setOrders([new OrderClass(res.data), ...data.orders])
       setTimeout(() => setActive(0), 500)
     })
   })
   createLisener('createNewOrderAndPrint', async (data) => {
-    await app.greateOrder({...data.newOrder})
+    console.log(data.newOrder)
+    await app.greateOrder({...data.newOrder, complect: data.newOrder.complect.join(', '), view: data.newOrder.view.join(', ')})
     .then(async (res) => {
       setOrders([new OrderClass(res.data), ...data.orders])
       setTimeout(() => setActive(0), 7000)
@@ -85,15 +87,12 @@ function MainPage() {
   }, [])
 
   const getOrdersTimerUpdate = async () => {
-        // console.log('set interval')
         const interval = sessionStorage.getItem('interval')
-        // console.log(interval)
         if(interval){
           clearInterval(Number(interval))
         }
         const int = setInterval(async () => {
         if(sessionData('read', 'currentUser')){
-          // console.log('update orders')
           const res = await app.getOrdersTime(navigate)
           setOrders(res.sort((a, b) => b.date - a.date))
         }

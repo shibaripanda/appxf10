@@ -13,10 +13,29 @@ export class CampsController {
     //     return this.ordersService.createOrder(orderDto)
     // }
 
+    // @UseGuards(JwtAuthGuard)
+    // @Put('/getmysubs/:campId')
+    // getMySubs(@Param('campId') campId: string, @Body() obj: object){
+    //     return this.campsService.getMySubs(campId)
+    // }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('/getmysubs/:campId')
+    getMySubs(@Param('campId') campId: string){
+        return this.campsService.getMySubs(campId)
+    }
+
+
     @UseGuards(JwtAuthGuard)
     @Put('/addsubcamp/:campId')
-    addSubCamp(@Param('campId') campId: string, @Body() obj: object, @Request() req: any){
-        this.campsService.addSubCamp(campId, obj, req.user._id)
+    addSubCamp(@Param('campId') campId: string, @Body() obj: object){
+        this.campsService.addSubCamp(campId, obj)
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Put('/deletesubcamp/:campId')
+    deleteSubCamp(@Param('campId') campId: string, @Body() obj: object){
+        this.campsService.deleteSubCamp(campId, obj)
     }
 
     @UseGuards(JwtAuthGuard)

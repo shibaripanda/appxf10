@@ -1,4 +1,4 @@
-import { Container, Grid, MultiSelect, Select, TextInput } from '@mantine/core';
+import { Container, Grid, MultiSelect, TextInput } from '@mantine/core';
 // import classes from './FeaturesGrid.module.css';
 import React from 'react';
 import { ComboBoxInput } from '../ComboInputBox/ComboBoxInput.tsx';
@@ -15,25 +15,15 @@ export function FeaturesGrid(props) {
             return 4
         }
         
-            // if(field.index === 'title'){
-            //     return <Grid.Col span={sp()} key={index}>
-            //     <Select
-            //     label={field.label} 
-            //     placeholder={field.label} 
-            //     value={props.value[field.index]} 
-            //     clearable
-            //     data={props.serviceSettings.generalDataList[field.index]}
-            //     // onChange={(value) => setRole(value ? value : '')}
-            //     onChange={(value) => {props.setValue({...props.value, [field.index]: value ? value : ''})}}
-            // />
-            // </Grid.Col>
-            // }
             if(field.variants){
                 if(['view', 'complect'].includes(field.index)){
                     return <Grid.Col span={sp()} key={index}>
                                 <MultiSelect
                                     value={props.value[field.index]}
-                                    onChange={(value) => {props.setValue({...props.value, [field.index]: value ? value : ''})}}
+                                    onChange={(value) => {
+                                        console.log(value)
+                                        props.setValue({...props.value, [field.index]: value ? value : ''})
+                                    }}
                                     label={field.label} 
                                     placeholder={field.label} 
                                     data={props.serviceSettings.generalDataList[field.index]}

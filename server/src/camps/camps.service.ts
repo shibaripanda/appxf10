@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Camp } from './camp.model';
 import { Model } from 'mongoose';
 import { UsersService } from 'src/users/users.service';
+import { validObjectId } from 'src/modules/validObjectId';
 
 @Injectable()
 export class CampsService {
@@ -18,14 +19,42 @@ export class CampsService {
         return order
     }
 
-    async addSubCamp(campId: string, obj: object, id: number){
-        console.log(obj)
-        const res = await this.campModel.findOne({_id: obj['id']})
-        console.log(res)
-        // if(res){
-        //    await this.campModel.updateOne({_id: campId, owner: id}, {$addToSet: {subcamp: obj['id']}}) 
-        // }
-        
+    async deleteSubCamp(campId: string, obj: object){
+        await this.campModel.updateOne({_id: campId}, {$pull: {subcamps: obj['id']}}) 
+    }
+
+    async getMySubs(campId: string){
+        const subs = await this.campModel.findOne({_id: campId}, {subcamps: 1})
+        const res = []
+        for(const i of subs.subcamps){
+            res.push({id: i, name: (await this.campModel.findOne({_id: i}, {name: 1})).name})
+        }
+        return res
+    }
+
+    async addSubCamp(campId: string, obj: object){
+        console.log(obj['id'])
+        if(validObjectId(obj['id'])){
+            const res = await this.campModel.findOne({_id: obj['id']})
+            if(res){
+                console.log('addsub')
+                await this.campModel.updateOne({_id: campId}, {$addToSet: {subcamps: obj['id']}}) 
+            }
+            else{
+                console.log('not addsub')
+            } 
+        }
+        else{
+           console.log('no objId') 
+        }
+    }
+
+    async getSubServices(campId){
+        return (await this.campModel.find({subcamps: campId}, {_id: 1})).map(item => item._id)
+    }
+
+    async getCamp(){
+        return await this.campModel.find({})
     }
 
     async getCampsByOwnerEmail(user: any){
