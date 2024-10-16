@@ -11,7 +11,7 @@ import { CampSchema } from 'src/camps/camp.model';
 @Module({
   imports: [
     forwardRef(() => UsersModule),
-    JwtModule.register({secret: process.env.SECRET_KEY, signOptions: {expiresIn: '24h'}}), 
+    JwtModule.register({secret: process.env.SECRET_KEY, signOptions: {expiresIn: '12h'}}), 
     MongooseModule.forFeature([{ name: 'User', schema: UsersSchema }, { name: 'Camp', schema: CampSchema }]),
     CampsModule
   ],

@@ -4,6 +4,7 @@ import { dateToLokalFormatFull } from '../../modules/dateToLocalFormat.js'
 import { TableOpenOrder } from '../../components/TableOpenOrder/TableOpenOrder.tsx'
 import { ModalWindowPrint } from '../../components/ModalWindow/ModalWindowPrint.tsx'
 import { ServiceTable } from '../../components/ServiceTable/ServiceTable.tsx'
+import { sessionData } from '../../modules/sessionData.js'
 
 export function OpenOrder(props: any) {
   console.log(props.data)
@@ -77,7 +78,7 @@ export function OpenOrder(props: any) {
     }
     const topButtonsLine = () => {
 
-      const arrayButtons = [
+      let arrayButtons = [
           {title: 'Delete',
             disabled: blockDeletingOrder(),
             print: false,
@@ -105,6 +106,28 @@ export function OpenOrder(props: any) {
           },
           }
       ]
+      const arrayButtonsUserManagerMaster = [
+        {title: 'Back',
+          disabled: disabledModeButtons('index'),
+          print: false,
+          func: async () => {
+            props.close()
+            }, 
+        },
+        {title: '🖨 Order',
+        disabled: false,
+        color: 'green',
+        print: true,
+        format: 'new',
+        func: async () => {
+            return props.data
+        },
+        }
+      ]
+      const role: string = sessionData('read', 'role')
+      if(['user', 'manager', 'master'].includes(role)){
+        arrayButtons = arrayButtonsUserManagerMaster
+      }
       for(let i of props.serviceSettings.generalStatusList.filter(item => ['cancel', 'close', 'new', 'warranty'].includes(item.index))){
           arrayButtons.push({
             title: '🖨 ' + i.label,
@@ -119,6 +142,21 @@ export function OpenOrder(props: any) {
             }
           })
       }
+
+      const inputForDelete = () => {
+        if(!['user', 'manager', 'master'].includes(role)){
+          return (
+              <TextInput
+                placeholder={props.data.order}
+                value={blockDelete}
+                onChange={(event) => {
+                  setBlockDelete(event.currentTarget.value)
+              }}
+            />
+          )
+        }
+      }
+
       return (
         <div>
           <Container>
@@ -128,18 +166,13 @@ export function OpenOrder(props: any) {
               spacing={{ base: 'xl', md: 15 }}
               verticalSpacing={{ base: 'md', md: 20 }}
             >
-            <TextInput
-              placeholder={props.data.order}
-              value={blockDelete}
-              onChange={(event) => {
-                setBlockDelete(event.currentTarget.value)
-              }}
-            />
+            {inputForDelete()}
             {arrayButtons.map((but, index) => printBut(but, index))}
             </SimpleGrid>
           </Container>
         </div>
       )
+
     }
     const bottomButtonsLine = () => {
       const arrayButtons: any = []

@@ -6,7 +6,7 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 // import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 // import { User } from 'src/users/user.model';
 import { UsersService } from 'src/users/users.service';
-// import { sendEmail } from 'src/modules/sendMail';
+import { sendEmail } from 'src/modules/sendMail';
 import { User } from 'src/users/user.model';
 import * as bcrypt from 'bcryptjs'
 import { CampsService } from 'src/camps/camps.service';
@@ -27,8 +27,8 @@ export class AuthService {
         if(user){
             const code = rendomNumberOrder()
             await this.usersService.updateUser({_id: user._id}, {emailAuthCode: {code: String(code), time: Date.now(), step: 1, name: false}})
-            // await sendEmail(user.email, 'Временный пароль: ', String(code))
-            // return `Check ${userDto.email} for password`
+            await sendEmail(user.email, 'Временный пароль: ', String(code))
+            return `Check ${userDto.email} for password`
         }
         else{
             const newUsers = await this.campService.searchNewUser(userDto.email)
