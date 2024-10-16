@@ -6,8 +6,6 @@ import { ButtonsForNewOrder } from '../ButtonsForNewOrder/ButtonsForNewOrder.tsx
 
 export function FeaturesGrid(props) {
 
-    console.log(props)
-
     const makeFields = (field, index) => {
         
         const sp = () => {
@@ -21,7 +19,6 @@ export function FeaturesGrid(props) {
                                 <MultiSelect
                                     value={props.value[field.index]}
                                     onChange={(value) => {
-                                        console.log(value)
                                         props.setValue({...props.value, [field.index]: value ? value : ''})
                                     }}
                                     label={field.label} 

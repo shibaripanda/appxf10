@@ -7,6 +7,7 @@ import { ServiceTable } from '../../components/ServiceTable/ServiceTable.tsx'
 import { sessionData } from '../../modules/sessionData.js'
 
 export function OpenOrder(props: any) {
+
   console.log(props.data)
 
     const [newInfo, setNewInfo] = useState('')
@@ -220,6 +221,9 @@ export function OpenOrder(props: any) {
           }
           return ''
           
+        }
+        else if(i === 'masters'){
+          return props.data.getMasters()
         }
         return props.data[i]
       }

@@ -52,17 +52,25 @@ function MainPage() {
     setValue(obj)
     return obj
   }
-  createLisener('createNewOrder', async (data) => {
-    console.log(data.newOrder)
-    await app.greateOrder({...data.newOrder, complect: data.newOrder.complect.join(', '), view: data.newOrder.view.join(', ')})
-    .then(async (res) => {
-      setOrders([new OrderClass(res.data), ...data.orders])
-      setTimeout(() => setActive(0), 500)
-    })
-  })
+  // createLisener('createNewOrder', async (data) => {
+  //   console.log(data.newOrder)
+  //   await app.greateOrder({...data.newOrder, complect: data.newOrder.complect.join(', '), view: data.newOrder.view.join(', ')})
+  //   .then(async (res) => {
+  //     setOrders([new OrderClass(res.data), ...data.orders])
+  //     setTimeout(() => setActive(0), 500)
+  //   })
+  // })
   createLisener('createNewOrderAndPrint', async (data) => {
-    console.log(data.newOrder)
-    await app.greateOrder({...data.newOrder, complect: data.newOrder.complect.join(', '), view: data.newOrder.view.join(', ')})
+    // console.log(data.newOrder)
+    console.log(data.campInfo.documents.filial.text)
+    console.log(data.campInfo.documents.namecomp.text)
+    await app.greateOrder({
+      ...data.newOrder, 
+      complect: data.newOrder.complect.join(', '), 
+      view: data.newOrder.view.join(', '), 
+      campName: data.campInfo.documents.namecomp.text,
+      filial: data.campInfo.documents.filial.text
+    })
     .then(async (res) => {
       setOrders([new OrderClass(res.data), ...data.orders])
       setTimeout(() => setActive(0), 7000)

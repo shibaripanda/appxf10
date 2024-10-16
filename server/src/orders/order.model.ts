@@ -44,7 +44,9 @@ export const OrderSchema = new mongoose.Schema({
   masters: {type: String, default: '--'}, //g
   dateOut: {type: Number}, //g
   info: {type: String}, //g
-  firm: {type: String}, //g
+  firm: {type: String},
+  filial: {type: String},
+  campName: {type: String}, //g
   soglas: {type: Boolean}, //g
 }, {timestamps: true})
 

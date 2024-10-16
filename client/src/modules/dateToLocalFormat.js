@@ -11,7 +11,10 @@ export const dateToLokalFormatClock = (date) => {
 }
 
 export const dateToLokalFormatForMainTable = (date) => {
-    if(new Date(Date.now()).toLocaleString().split(',')[0] === new Date(date).toLocaleString().split(',')[0]){
+    if(date === 0){
+        return '--'
+    }
+    else if(new Date(Date.now()).toLocaleString().split(',')[0] === new Date(date).toLocaleString().split(',')[0]){
         return new Date(date).toLocaleString().split(',')[1].toString().slice(0, -3)
     }
     return new Date(date).toLocaleString().split(',')[0]

@@ -19,7 +19,6 @@ export class Print extends React.PureComponent {
     documentSheet(){
       
       if(this.props.format === 'new'){
-        console.log(this.props.format)
         return <PrintComp props={this.props} ref={el => (this.componentRef = el)}/>
       }
       else if(this.props.format === 'close'){

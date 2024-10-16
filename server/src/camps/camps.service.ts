@@ -4,6 +4,7 @@ import { Camp } from './camp.model';
 import { Model } from 'mongoose';
 import { UsersService } from 'src/users/users.service';
 import { validObjectId } from 'src/modules/validObjectId';
+import { getFixserviceSettings } from 'src/modules/getFixserviceSettings';
 
 @Injectable()
 export class CampsService {
@@ -74,6 +75,12 @@ export class CampsService {
         return camps
     }
     async getSettingsCamp(campId: string, userId: string){
+
+        const res = getFixserviceSettings()
+
+        await this.campModel.updateMany({}, {'generalSettings.generalOrderList': res.generalSettings.generalOrderList})
+
+
         const settings = await this.campModel.findOne({_id: campId}, {_id: 0, userSettings: 1, documentSettings: 1, generalSettings: 1})
         return {...settings.userSettings[userId], ...settings.documentSettings,  ...settings.generalSettings}
     }

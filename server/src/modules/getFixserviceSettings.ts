@@ -411,6 +411,24 @@ export const getFixserviceSettings = () => {
             block: true 
         },
         {
+            index: 'campName', 
+            label: 'Компания',      
+            variants: false,
+            maintable: true,
+            neworder: false,
+            card: true,
+            block: true 
+        },
+        {
+            index: 'filial', 
+            label: 'Филиал',      
+            variants: false,
+            maintable: true,
+            neworder: false,
+            card: true,
+            block: true 
+        },
+        {
             index: '_id', 
             label: '_id',      
             variants: false,
@@ -428,6 +446,24 @@ export const getFixserviceSettings = () => {
             card: true,
             block: true 
         },
+        {
+            index: 'profit', 
+            label: 'Профит',      
+            variants: false,
+            maintable: true,
+            neworder: false,
+            card: true,
+            block: true 
+        },
+        {
+            index: 'expenses', 
+            label: 'Расходы',      
+            variants: false,
+            maintable: true,
+            neworder: false,
+            card: true,
+            block: true 
+        }
         
 
     ]
@@ -561,7 +597,7 @@ export const getFixserviceSettings = () => {
     const docprint = {
 
         namecomp: {label: 'Название сервисного центра', 
-        text: 'XF10 Сервис'},
+        text: 'Название Сервиса'},
 
         name: {label: 'Название главного документа о приемке в ремонт', 
         text: 'Заказ на оказание услуг'},
@@ -576,7 +612,7 @@ export const getFixserviceSettings = () => {
         text:  'Акт приёмки-передачи оборудования'},
 
         recviz: {label: 'Реквизиты компании (Исполнитель)', 
-        text: 'ЧСУП "Компьютер и Принтер", Минск, Лобанка 94, павильон 10'},
+        text: 'ЧСУП "Ремонт техники", Минск, Одинцова 94, павильон 10'},
 
         oznak: {label: 'Подтверждение ознакомления', 
         text: 'Заказчик ознакомлен с данным заказ-нарядом и принимает все условия.'},
@@ -591,7 +627,7 @@ export const getFixserviceSettings = () => {
         text: 'Сухарево'},
 
         telefonnumber: {label: 'Телефоны компании', 
-        text: '+375 44 7310419 A1'},
+        text: '+375 44 00000000 A1 +375 44 1111111 A1'},
 
         varanttext: {label: 'Текст гарантии', 
         text: `- Исполнитель берет на себя обязанность на безвозмездное устранение неисправностей связанных с выполнением выше указанных работ в течении гарантийного срока.

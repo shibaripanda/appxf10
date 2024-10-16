@@ -14,7 +14,7 @@ export class AppClass {
     }
 
     async addSubCamp(obj){
-        await axiosCall('PUT', `${this.link}/api/deletesubcamp/${this.campId}`, obj)
+        await axiosCall('PUT', `${this.link}/api/addsubcamp/${this.campId}`, obj)
     }
 
     async deleteSubCamp(obj){
@@ -92,7 +92,6 @@ export class AppClass {
     }
     async getOrdersTime(navigate){
         const res = await axiosCall('GET', `${this.link}/api/orders/${this.campId}`, {})
-        console.log(res.status)
         if(res.status !== 200){
             sessionData('exit')
             navigate("/")

@@ -7,7 +7,6 @@ import { ModalWindowPrint } from "../ModalWindow/ModalWindowPrint.tsx";
 export const ButtonsForNewOrder = (props) => {
     
     const  checkDisabledClean = () => {
-        console.log(props.value)
         if(Object.values(props.value).filter(item => item === '').length === Object.values(props.value).length){
             return true
         }
@@ -44,10 +43,8 @@ export const ButtonsForNewOrder = (props) => {
             print: true,
             format: 'new',
             func: async () => {
-                console.log(props.value)
                 const newOr = await createNewOrder(props.value)
-                console.log(newOr)
-                myEmitter.emit('createNewOrderAndPrint', {newOrder: newOr, orders: props.orders})
+                myEmitter.emit('createNewOrderAndPrint', {newOrder: newOr, orders: props.orders, campInfo: props.serviceSettings})
                 // setTimeout( () => props.setValue(props.defaultValue(props.serviceSettings.generalOrderList)), 5000)
                 setTimeout( () => props.defaultValue(props.serviceSettings.generalOrderList), 5000)
                 return newOr

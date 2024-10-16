@@ -29,6 +29,8 @@ export class OrderClass {
         this.firm = order.firm
         this.soglas = order.soglas
         this._id = order._id
+        this.filial = order.filial
+        this.campName = order.campName
         this.link = getLink()
     }
     
@@ -122,5 +124,29 @@ export class OrderClass {
           }, $pull: {service: service},
           soglas: false
         })
+    }
+    getTotalCost(){
+      if(this.service.length){
+        return this.service.reduce((sum, item) => sum + item.price, 0)
+      }
+      return this.cost
+    }
+
+    getTotalProfit(){
+      if(this.service.length){
+        return this.service.reduce((sum, item) => sum + item.price, 0) - this.service.reduce((sum, item) => sum + item.sebes, 0)
+      }
+      return 0
+    }
+
+    getTotalExpenses(){
+      if(this.service.length){
+        return this.service.reduce((sum, item) => sum + item.sebes, 0)
+      }
+      return 0
+    }
+
+    getMasters(){
+      return [...new Set(this.service.map(item => item.master))].join(', ')
     }
 }

@@ -13,10 +13,26 @@ export function TableReviews(props) {
       if(item === 'date' || item ==='dateOut'){
         return dateToLokalFormatForMainTable(row[item])
       }
+      else if(item === 'profit'){
+        return row.getTotalProfit()
+      }
+      else if(item === 'expenses'){
+        return row.getTotalExpenses()
+      }
+      else if(item === 'cost'){
+        return row.getTotalCost()
+      }
+      else if(item === 'masters'){
+        return row.getMasters()
+      }
       return row[item]
     }
     return activTableColsHeader.map((item, index) => <Table.Td key={index}>{lookData(row, item)}</Table.Td>)
   }
+
+  console.log(props.filteringOrders[0].service)
+  console.log(props.filteringOrders[0].getTotalCost())
+  console.log(props.filteringOrders[0].getTotalProfit())
 
   const rows = props.filteringOrders.map((row) => <>{makeRows(row)}</>)
   // console.log(rows)
