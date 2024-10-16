@@ -61,9 +61,6 @@ function MainPage() {
   //   })
   // })
   createLisener('createNewOrderAndPrint', async (data) => {
-    // console.log(data.newOrder)
-    console.log(data.campInfo.documents.filial.text)
-    console.log(data.campInfo.documents.namecomp.text)
     await app.greateOrder({
       ...data.newOrder, 
       complect: data.newOrder.complect.join(', '), 

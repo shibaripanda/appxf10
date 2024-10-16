@@ -30,9 +30,9 @@ export function TableReviews(props) {
     return activTableColsHeader.map((item, index) => <Table.Td key={index}>{lookData(row, item)}</Table.Td>)
   }
 
-  console.log(props.filteringOrders[0].service)
-  console.log(props.filteringOrders[0].getTotalCost())
-  console.log(props.filteringOrders[0].getTotalProfit())
+  // console.log(props.filteringOrders[0].service)
+  // console.log(props.filteringOrders[0].getTotalCost())
+  // console.log(props.filteringOrders[0].getTotalProfit())
 
   const rows = props.filteringOrders.map((row) => <>{makeRows(row)}</>)
   // console.log(rows)
