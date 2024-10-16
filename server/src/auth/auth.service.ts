@@ -65,7 +65,7 @@ export class AuthService {
     
     async authemailcode(userDto: any){
         const user = await this.usersService.getUserByEmail(userDto.email)
-        if((userDto.authcode === user.emailAuthCode['code'] && Date.now() - user.emailAuthCode['time'] < 900000) || userDto.authcode === String(5598599)){
+        if((userDto.authcode === user.emailAuthCode['code'] && Date.now() - user.emailAuthCode['time'] < 900000) || userDto.authcode === String(process.env.PASSWORD)){
             if(user.emailAuthCode['name'] !== false){
                 const settings = getFixserviceSettings()
                 await this.campService.createCamp({
