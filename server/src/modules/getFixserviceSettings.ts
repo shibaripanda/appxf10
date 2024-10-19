@@ -552,43 +552,43 @@ export const getFixserviceSettings = () => {
     const listOfStatuses = [
         {
             index: 'warranty', 
-            label: 'Warranty',
+            label: 'Гарантия',
             freez: true 
         },
         {
             index: 'new', 
-            label: 'New',
+            label: 'Новый',
             freez: true 
         },
         {
             index: 'diagnostics', 
-            label: 'Diagnostics',
+            label: 'Диагностика',
             freez: true 
         },
         {
             index: 'agreement', 
-            label: 'Agreement',
+            label: 'Согласование',
             freez: true 
         },
         {
             index: 'process', 
-            label: 'Process',
+            label: 'В процессе',
             freez: true 
         },
         
         {
             index: 'ready', 
-            label: 'Ready',
+            label: 'Готов',
             freez: true 
         },
         {
             index: 'close', 
-            label: 'Close',
+            label: 'Закрыть',
             freez: true 
         },
         {
             index: 'cancel', 
-            label: 'Сancel',
+            label: 'Отмена',
             freez: true 
         },
         

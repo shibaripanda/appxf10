@@ -4,7 +4,7 @@ import { Camp } from './camp.model';
 import { Model } from 'mongoose';
 import { UsersService } from 'src/users/users.service';
 import { validObjectId } from 'src/modules/validObjectId';
-// import { getFixserviceSettings } from 'src/modules/getFixserviceSettings';
+import { getFixserviceSettings } from 'src/modules/getFixserviceSettings';
 
 @Injectable()
 export class CampsService {
@@ -19,11 +19,9 @@ export class CampsService {
         const order = await this.campModel.create(dto)
         return order
     }
-
     async deleteSubCamp(campId: string, obj: object){
         await this.campModel.updateOne({_id: campId}, {$pull: {subcamps: obj['id']}}) 
     }
-
     async getMySubs(campId: string){
         const subs = await this.campModel.findOne({_id: campId}, {subcamps: 1})
         const res = []
@@ -32,7 +30,6 @@ export class CampsService {
         }
         return res
     }
-
     async addSubCamp(campId: string, obj: object){
         console.log(obj['id'])
         if(validObjectId(obj['id'])){
@@ -49,15 +46,12 @@ export class CampsService {
            console.log('no objId') 
         }
     }
-
     async getSubServices(campId){
         return (await this.campModel.find({subcamps: campId}, {_id: 1})).map(item => item._id)
     }
-
     async getCamp(){
         return await this.campModel.find({})
     }
-
     async getCampsByOwnerEmail(user: any){
         const camps = await this.campModel.find({users: {$elemMatch: {email: user.email}}})
         return camps.map(item => item._id)
@@ -76,9 +70,9 @@ export class CampsService {
     }
     async getSettingsCamp(campId: string, userId: string){
 
-        // const res = getFixserviceSettings()
+        const res = getFixserviceSettings()
 
-        // await this.campModel.updateMany({}, {'generalSettings.generalOrderList': res.generalSettings.generalOrderList})
+        await this.campModel.updateMany({}, {'generalSettings.generalStatusList': res.generalSettings.generalStatusList})
 
 
         const settings = await this.campModel.findOne({_id: campId}, {_id: 0, userSettings: 1, documentSettings: 1, generalSettings: 1})
@@ -87,8 +81,7 @@ export class CampsService {
     async updateUserSettings(campId: string, obj: object, userId: string){
         const link = 'userSettings.' + userId + '.' + obj['item']
         
-        await this.campModel.updateOne({_id: campId}, {[link]: obj['newData']})
-        
+        await this.campModel.updateOne({_id: campId}, {[link]: obj['newData']})  
     }
     async updateDocumentSettings(campId: string, obj: object){
         const link = 'documentSettings.documents.' + obj['item'] + '.text'
