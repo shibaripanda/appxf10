@@ -80,7 +80,7 @@ export function OpenOrder(props: any) {
     const topButtonsLine = () => {
 
       let arrayButtons = [
-          {title: 'Delete',
+          {title: 'Удалить',
             disabled: blockDeletingOrder(),
             print: false,
             color: 'red',
@@ -90,14 +90,14 @@ export function OpenOrder(props: any) {
               props.getOrders()
             }
           },
-          {title: 'Back',
+          {title: 'Назад',
             disabled: disabledModeButtons('index'),
             print: false,
             func: async () => {
               props.close()
               }, 
           },
-          {title: '🖨 Order',
+          {title: '🖨 Заказ',
           disabled: false,
           color: 'green',
           print: true,
@@ -108,14 +108,14 @@ export function OpenOrder(props: any) {
           }
       ]
       const arrayButtonsUserManagerMaster = [
-        {title: 'Back',
+        {title: 'Назад',
           disabled: disabledModeButtons('index'),
           print: false,
           func: async () => {
             props.close()
             }, 
         },
-        {title: '🖨 Order',
+        {title: '🖨 Заказ',
         disabled: false,
         color: 'green',
         print: true,
