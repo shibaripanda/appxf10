@@ -1,5 +1,5 @@
 'use client'
-import { Group } from '@mantine/core'
+import { Checkbox, Group } from '@mantine/core'
 import classes from './HeaderSearch.module.css'
 import React from 'react'
 import { sessionData } from '../../modules/sessionData'

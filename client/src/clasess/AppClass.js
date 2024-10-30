@@ -16,15 +16,12 @@ export class AppClass {
     async addSubCamp(obj){
         await axiosCall('PUT', `${this.link}/api/addsubcamp/${this.campId}`, obj)
     }
-
     async deleteSubCamp(obj){
         await axiosCall('PUT', `${this.link}/api/deletesubcamp/${this.campId}`, obj)
     }
-
     async getMySubs(){
         return (await axiosCall('GET', `${this.link}/api/getmysubs/${this.campId}`)).data
     }
-
     async updateGeneralSettings(obj){
         await axiosCall('PUT', `${this.link}/api/updategeneralsettings/${this.campId}`, obj)
     }
@@ -88,6 +85,10 @@ export class AppClass {
     }
     async getOrders(){
         const res = await axiosCall('GET', `${this.link}/api/orders/${this.campId}`, {})
+        return res.data.map(item => new OrderClass(item))
+    }
+    async getOrdersActiv(){
+        const res = await axiosCall('GET', `${this.link}/api/orders/activ/${this.campId}`, {})
         return res.data.map(item => new OrderClass(item))
     }
     async getOrdersTime(navigate){

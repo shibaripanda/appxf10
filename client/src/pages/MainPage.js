@@ -109,6 +109,7 @@ function MainPage() {
   }
 
   const getOrders = async () => {
+    console.log(await app.getOrdersActiv())
     const res = await app.getOrders()
     setOrders(res.sort((a, b) => b.date - a.date))
   }
