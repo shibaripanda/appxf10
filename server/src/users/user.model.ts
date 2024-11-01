@@ -6,7 +6,8 @@ export const UsersSchema = new mongoose.Schema({
   name: {type: String},
   emailAuthCode: {type: Object},
   telegramtoken: {type: String},
-  telegramId: {type: Number}
+  telegramId: {type: Number},
+  currentOrderMedia: {type: String}
 }, {timestamps: true})
 
 export interface User {

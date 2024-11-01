@@ -8,5 +8,6 @@ export class CreateOrderDto {
     readonly order: string
     readonly date: number
     readonly clientTel: string
+    readonly orderId: string
 }
 

@@ -7,6 +7,7 @@ import { FixModule } from './fix/fix.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { CampsModule } from './camps/camps.module';
+import { BotModule } from './bot/bot.module';
 
 @Module({
   imports: [
@@ -15,10 +16,10 @@ import { CampsModule } from './camps/camps.module';
     FixModule, 
     AuthModule, 
     UsersModule, 
-    CampsModule
+    CampsModule, 
+    BotModule
   ],
   controllers: [AppController],
-  providers: [AppService],
-  exports: [AppService]
+  providers: [AppService]
 })
 export class AppModule {}

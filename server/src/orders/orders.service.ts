@@ -4,7 +4,6 @@ import { Order } from './order.model';
 import { Model } from 'mongoose';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { CampsService } from 'src/camps/camps.service';
-import { AppService } from 'src/app.service';
 // import { UpdateOrderDto } from './dto/update-order.dto';
 
 @Injectable()
@@ -13,13 +12,13 @@ export class OrdersService {
     constructor(
         @InjectModel('Order') private orderModel: Model<Order>,
         private campService: CampsService,
-        private appService: AppService
+        // private appService: AppService
     ) {}
-
-    async createOrder(dto: CreateOrderDto, tId: any){
+    // dto.title + ' ' + dto.firm + ' ' + dto.model + '\n' + dto.problem + '\n' + dto.info + '\n' + dto.manager + '\n' + dto.order + '\n' + dto.clientTel + '\n' + new Date(dto.date).toLocaleDateString()
+    async createOrder(dto: CreateOrderDto, tId: any, _id: string){
         const order = await this.orderModel.create(dto)
-        console.log(dto)
-        await this.appService.newOrderTelegramMessage(tId, dto.title + ' ' + dto.firm + ' ' + dto.model + '\n' + dto.problem + '\n' + dto.info + '\n' + dto.manager + '\n' + dto.order + '\n' + dto.clientTel + '\n' + new Date(dto.date).toLocaleDateString())
+        // console.log(dto)
+        // await this.appService.newOrderTelegramMessage(tId, dto.orderId, _id)
         return order 
     }
 

@@ -10,6 +10,10 @@ export class UsersService {
     constructor(
         @InjectModel('User') private userModelNestreact: Model<User>) {}
 
+    async orderForMedia(_id: any, orderId: string){
+        await this.userModelNestreact.updateOne({_id: _id}, {currentOrderMedia: orderId})
+    }
+
     async updateTelegramId(id: any, telegramId: any){
         await this.userModelNestreact.updateOne({_id: id}, {telegramId: telegramId})
     }

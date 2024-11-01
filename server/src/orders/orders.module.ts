@@ -5,14 +5,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { OrderSchema } from './order.model';
 import { AuthModule } from 'src/auth/auth.module';
 import { CampsModule } from 'src/camps/camps.module';
-import { AppModule } from 'src/app.module';
 @Module({
 
   imports: [
-    MongooseModule.forFeature([{ name: 'Order', schema: OrderSchema }]), forwardRef(() => AuthModule,), CampsModule, forwardRef(() => AppModule)
+    MongooseModule.forFeature([{ name: 'Order', schema: OrderSchema }]), forwardRef(() => AuthModule,), CampsModule
   ],
   controllers: [OrdersController],
-  providers: [OrdersService]
+  providers: [OrdersService],
+  exports: [OrdersService]
   
 })
 

@@ -1,5 +1,6 @@
 import { Telegraf } from 'telegraf'
 import { botStart } from 'src/telegram/triggers/botStart'
+import { botMessage } from 'src/telegram/triggers/botMessage'
 
 export const telegramBot = async (data: any) => {
     try{
@@ -10,7 +11,7 @@ export const telegramBot = async (data: any) => {
         
         // await botChatMember(bot, appContext)
         // await botCommands(bot, appContext)
-        // await botMessage(bot, appContext)
+        await botMessage(bot, data)
         // await botCallback(bot, appContext)
 
 
