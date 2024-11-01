@@ -16,7 +16,8 @@ export const telegramBot = async (data: any) => {
 
         bot.launch(option)
         process.once('SIGINT', () => bot.stop('SIGINT'))
-        process.once('SIGTERM', () => bot.stop('SIGTERM')) 
+        process.once('SIGTERM', () => bot.stop('SIGTERM'))
+        return bot 
     }
     catch(error){
         console.log(error)

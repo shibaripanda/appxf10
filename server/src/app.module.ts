@@ -19,5 +19,6 @@ import { CampsModule } from './camps/camps.module';
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [AppService]
 })
 export class AppModule {}

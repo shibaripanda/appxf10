@@ -88,7 +88,7 @@ export class AuthService {
         // const ownerCamps = await this.campService.getCampsByOwnerEmail({users: {$elemMatch: {email: user.email}}}) //{owner: user.email}
         const ownerCamps = await this.campService.getCampsByOwnerEmail(user) //{owner: user.email}
         console.log(ownerCamps)
-        const payload = {email: user.email, _id: user._id, campId: ownerCamps}
+        const payload = {email: user.email, _id: user._id, campId: ownerCamps, tId: user.telegramId}
         return {
             token: this.jwtService.sign(payload), email: user.email, name: user.name ? user.name : 'noname'
         }

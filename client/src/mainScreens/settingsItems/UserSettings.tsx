@@ -34,11 +34,11 @@ export const UserSettings = (props) => {
                         Обновить
                     </Button>
                     <hr style={{marginTop: '1vmax', marginBottom: '1vmax'}}></hr>
-                    {/* <NavLink
-                    href={`https://t.me/matexfbot?start=${user['telegramtoken']}`}
-                    label="Настройка входа с помощью Telegram App"
+                    <NavLink
+                    href={`https://t.me/appxf10bot?start=${user['telegramtoken']}`}
+                    label="Connect Telegram"
                     target="_blank"
-                    /> */}
+                    />
                 </Container>
              </div>
          ) 

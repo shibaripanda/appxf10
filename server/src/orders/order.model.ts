@@ -56,5 +56,8 @@ export interface Order {
   title: string;
   sn: string;
   model: string;
+  firm: string;
+  order: string;
+  problem: string;
   history: [];
 }
