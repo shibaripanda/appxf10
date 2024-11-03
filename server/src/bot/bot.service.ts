@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
-import { CampsService } from 'src/camps/camps.service';
-import { OrdersService } from 'src/orders/orders.service';
-import { telegramBot } from 'src/telegram/telegramBot';
+import {
+    Update,
+    Ctx,
+    Start,
+    InjectBot,
+    // Help,
+    // On,
+    // Hears,
+  } from 'nestjs-telegraf'
+import { botStart } from './telegram/triggers/botStart'
 import { UsersService } from 'src/users/users.service';
+import { Injectable } from '@nestjs/common';
+import { Telegraf } from 'telegraf';
+// import { InjectModel } from '@nestjs/mongoose';
+  
+  @Update()
+  @Injectable()
+  export class BotService {
 
-@Injectable()
-export class BotService {
+    constructor(
+        @InjectBot() private bot: Telegraf,
+        private userService: UsersService
+    ) {}
 
-    // constructor(
-    //     private userService: UsersService,
-    //     private campService: CampsService,
-    //     private orderService: OrdersService
-    // ){}
-
-    // async onApplicationBootstrap() {
-    //     global.bot = await telegramBot({campService: this.campService, userService: this.userService, orderService: this.orderService})
+    @Start()
+    async start(@Ctx() ctx: any) {
+      await botStart(ctx, this.userService)
+      await ctx.reply('Welcome');
+    }
+  
+    // @Help()
+    // async help(@Ctx() ctx: TelegrafContext) {
+    //   await ctx.reply('Send me a sticker');
+    // }
+  
+    // @On('sticker')
+    // async on(@Ctx() ctx: TelegrafContext) {
+    //   await ctx.reply('👍');
+    // }
+  
+    // @Hears('hi')
+    // async hears(@Ctx() ctx: TelegrafContext) {
+    //   await ctx.reply('Hey there');
     // }
 
-    // async newOrderTelegramMessage(tId, order, userId){
-    //     console.log(tId, order, userId)
-    //     await this.userService.orderForMedia(userId, order.orderId)
-    //     await global.bot.telegram.sendMessage(tId, `Send photo for ${order.orderId}`, {parse_mode: 'HTML'}).catch(error => console.log(error))
-    // }  
-
-}
+    async newOrderTelegramMessage(tId, order, userId){
+        console.log(tId, order, userId)
+        await this.userService.orderForMedia(userId, order.order)
+        await this.bot['telegram']['sendMessage'](tId, `Send photo for ${order.order}`, {parse_mode: 'HTML'}).catch(error => console.log(error))
+    }  
+  }

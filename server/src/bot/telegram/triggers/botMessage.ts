@@ -4,7 +4,7 @@ export const botMessage = async (bot, data) => {
         bot.on('message', async (ctx) => {
 
             if(typeof ctx.message['photo'] !== "undefined" ){
-                const user = await data.userService.getUserByTelegramToken(ctx.from.id)
+                // const user = await data.userService.getUserByTelegramToken(ctx.from.id)
                 // await appContext.app.upDateUserImage(data[2], 'photo', ctx.message.photo[0].file_id)
                 console.log('photo')
             }

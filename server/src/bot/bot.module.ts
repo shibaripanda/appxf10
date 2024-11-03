@@ -1,15 +1,19 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { BotService } from './bot.service';
-import { UsersService } from 'src/users/users.service';
-import { CampsService } from 'src/camps/camps.service';
-import { OrdersService } from 'src/orders/orders.service';
+import { UsersModule } from 'src/users/users.module';
+// import { CampsModule } from 'src/camps/camps.module';
+// import { OrdersModule } from 'src/orders/orders.module';
+import { TelegrafModule } from 'nestjs-telegraf';
 
 @Module({
   imports: [
-    // forwardRef(() => UsersService),
-    // UsersService
-    // CampsService, 
-    // OrdersService
+    TelegrafModule.forRoot({token: process.env.BOT_TOKEN}),
+    UsersModule,
+    // CampsModule,
+    // OrdersModule,
+    // forwardRef(() => UsersModule),
+    // forwardRef(() => CampsModule), 
+    // forwardRef(() => OrdersModule)
   ],
   providers: [BotService],
   exports: [BotService]

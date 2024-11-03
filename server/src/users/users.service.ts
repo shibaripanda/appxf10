@@ -14,6 +14,10 @@ export class UsersService {
         await this.userModelNestreact.updateOne({_id: _id}, {currentOrderMedia: orderId})
     }
 
+    async getUserByTelegramId(telegramId: any){
+        return await this.userModelNestreact.findOne({telegramId: telegramId})
+    }
+
     async updateTelegramId(id: any, telegramId: any){
         await this.userModelNestreact.updateOne({_id: id}, {telegramId: telegramId})
     }

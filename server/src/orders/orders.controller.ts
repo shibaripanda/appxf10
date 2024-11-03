@@ -15,6 +15,7 @@ export class OrdersController {
     @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() orderDto: CreateOrderDto, @Request() req: any){
+        console.log(orderDto)
         console.log(req.user)
         return this.ordersService.createOrder({...orderDto, manager: req.user.email}, req.user.tId, req.user._id)
     }
