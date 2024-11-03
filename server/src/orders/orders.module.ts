@@ -6,12 +6,14 @@ import { OrderSchema } from './order.model';
 import { AuthModule } from 'src/auth/auth.module';
 import { CampsModule } from 'src/camps/camps.module';
 import { BotModule } from 'src/bot/bot.module';
-@Module({
+import { UsersModule } from 'src/users/users.module';
 
+@Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Order', schema: OrderSchema }]), 
     forwardRef(() => AuthModule),
     forwardRef(() => BotModule),
+    forwardRef(() => UsersModule),
     // BotModule, 
     CampsModule
   ],

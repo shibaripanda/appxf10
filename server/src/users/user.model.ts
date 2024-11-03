@@ -7,7 +7,8 @@ export const UsersSchema = new mongoose.Schema({
   emailAuthCode: {type: Object},
   telegramtoken: {type: String},
   telegramId: {type: Number},
-  currentOrderMedia: {type: String}
+  currentOrderMedia: {type: String},
+  photos: {type: Array}
 }, {timestamps: true})
 
 export interface User {
@@ -17,6 +18,7 @@ export interface User {
   emailAuthCode: object,
   role: string,
   telegramtoken: string,
-  telegramId: number
-  _id: any
+  telegramId: number,
+  _id: any,
+  photos: []
 }

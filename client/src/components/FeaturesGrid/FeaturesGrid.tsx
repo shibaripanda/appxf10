@@ -1,4 +1,4 @@
-import { Container, Grid, MultiSelect, TextInput } from '@mantine/core';
+import { Button, Container, Grid, MultiSelect, TextInput } from '@mantine/core';
 // import classes from './FeaturesGrid.module.css';
 import React from 'react';
 import { ComboBoxInput } from '../ComboInputBox/ComboBoxInput.tsx';
@@ -56,6 +56,7 @@ export function FeaturesGrid(props) {
             <Grid gutter="md" style={{marginTop: '20px'}}>
                 {features}
             </Grid>
+            <Button>Добавить фото</Button>
         </Container>
     )
 }

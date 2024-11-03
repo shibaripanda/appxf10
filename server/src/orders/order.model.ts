@@ -48,6 +48,7 @@ export const OrderSchema = new mongoose.Schema({
   filial: {type: String},
   campName: {type: String}, //g
   soglas: {type: Boolean}, //g
+  photos: {type: Array},
 }, {timestamps: true})
 
 export interface Order {
@@ -60,4 +61,5 @@ export interface Order {
   order: string;
   problem: string;
   history: [];
+  photos: []
 }

@@ -10,6 +10,12 @@ export class UsersService {
     constructor(
         @InjectModel('User') private userModelNestreact: Model<User>) {}
 
+
+    async updateUserOrderPhoto(telegramId: any, photo: any){
+        // await this.userModelNestreact.updateOne({telegramId: telegramId}, {photos: []})
+        await this.userModelNestreact.updateOne({telegramId: telegramId}, {$push: {photos: photo}})
+    }
+
     async orderForMedia(_id: any, orderId: string){
         await this.userModelNestreact.updateOne({_id: _id}, {currentOrderMedia: orderId})
     }

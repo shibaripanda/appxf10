@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { BotService } from './bot.service';
 import { UsersModule } from 'src/users/users.module';
 // import { CampsModule } from 'src/camps/camps.module';
-// import { OrdersModule } from 'src/orders/orders.module';
+import { OrdersModule } from 'src/orders/orders.module';
 import { TelegrafModule } from 'nestjs-telegraf';
 
 @Module({
@@ -13,7 +13,7 @@ import { TelegrafModule } from 'nestjs-telegraf';
     // OrdersModule,
     // forwardRef(() => UsersModule),
     // forwardRef(() => CampsModule), 
-    // forwardRef(() => OrdersModule)
+    forwardRef(() => OrdersModule)
   ],
   providers: [BotService],
   exports: [BotService]
