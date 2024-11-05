@@ -83,6 +83,17 @@ export class AppClass {
     async getMyCamp(){
         return await axiosCall('GET', `${this.link}/api/getmycamps`, {})
     }
+    async getPhotos(){
+        const res = await axiosCall('GET', `${this.link}/api/users/photos/`, {})
+        return res.data
+    }
+    // async sendMePhoto(photo){
+    //     const res = await axiosCall('GET', `${this.link}/api/users/photos/`, {})
+    //     return res.data
+    // }
+    async deletePhotos(){
+        await axiosCall('GET', `${this.link}/api/users/deletephotos/`, {})
+    }
     async getOrders(){
         const res = await axiosCall('GET', `${this.link}/api/orders/${this.campId}`, {})
         return res.data.map(item => new OrderClass(item))
@@ -90,6 +101,16 @@ export class AppClass {
     async getOrdersActiv(){
         const res = await axiosCall('GET', `${this.link}/api/orders/activ/${this.campId}`, {})
         return res.data.map(item => new OrderClass(item))
+    }
+    async getPhotosTime(navigate){
+        const res = await axiosCall('GET', `${this.link}/api/users/photos/`, {})
+        if(res.status !== 200){
+            sessionData('exit')
+            navigate("/")
+        }
+        else{
+            return res.data
+        }
     }
     async getOrdersTime(navigate){
         const res = await axiosCall('GET', `${this.link}/api/orders/${this.campId}`, {})

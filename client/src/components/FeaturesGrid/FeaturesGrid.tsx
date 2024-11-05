@@ -1,4 +1,4 @@
-import { Button, Container, Grid, MultiSelect, TextInput } from '@mantine/core';
+import { Button, Container, Grid, Image, MultiSelect, TextInput } from '@mantine/core';
 // import classes from './FeaturesGrid.module.css';
 import React from 'react';
 import { ComboBoxInput } from '../ComboInputBox/ComboBoxInput.tsx';
@@ -56,7 +56,28 @@ export function FeaturesGrid(props) {
             <Grid gutter="md" style={{marginTop: '20px'}}>
                 {features}
             </Grid>
-            <Button>Добавить фото</Button>
+            <hr style={{marginTop: '1vmax', marginBottom: '1vmax'}}></hr>
+            
+            <Grid>
+                {props.photos.map(
+                    (photo, index) => <Grid.Col span={2} key={index}>
+                    <Image
+                    src={`data:image/jpeg;base64,${photo.max}`}
+                    radius="sm"
+                    h='7vmax'
+                    w="auto"
+                    />
+            </Grid.Col>)}
+            </Grid>
+            <Button onClick={
+                        () => {
+                        props.app.deletePhotos()
+                        props.setPhotos([])
+                    }} 
+                    style={{marginTop: '1vmax'}} 
+                    disabled={!props.photos.length}>
+                    Удалить фото
+                </Button>
         </Container>
     )
 }

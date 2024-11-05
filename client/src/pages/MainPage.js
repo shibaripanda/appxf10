@@ -34,6 +34,7 @@ function MainPage() {
   const [value, setValue] = useState('')
   const [orders, setOrders] = useState([])
   const [subCamp, setSubCamp] = useState('')
+  const [photos, setPhotos] = useState([])
 
   const app = new AppClass()
 
@@ -79,6 +80,7 @@ function MainPage() {
         navigate('/')
       }
       else{
+        getPhotos()
         getOrders()
         getNavBar()
         getAppColor()
@@ -100,6 +102,8 @@ function MainPage() {
         if(sessionData('read', 'currentUser')){
           const res = await app.getOrdersTime(navigate)
           setOrders(res.sort((a, b) => b.date - a.date))
+          const ph = await app.getPhotosTime(navigate)
+          setPhotos(ph)
         }
         else{
           console.log('pause update orders')
@@ -108,8 +112,15 @@ function MainPage() {
       }, await app.timeUpdate())
   }
 
+  const getPhotos = async () => {
+    // console.log(await app.getOrdersActiv())
+    const res = await app.getPhotos()
+    console.log(res)
+    setPhotos(res ? res : [])
+  }
+
   const getOrders = async () => {
-    console.log(await app.getOrdersActiv())
+    // console.log(await app.getOrdersActiv())
     const res = await app.getOrders()
     setOrders(res.sort((a, b) => b.date - a.date))
   }
@@ -141,7 +152,7 @@ function MainPage() {
       
       const listScreens = [
         <ServiceScreen app={app} getOrders={getOrders} text={text} orders={orders} setOrders={setOrders} filter={filter} serviceSettings={serviceSettings} newSet={newSet} textFilter={textFilter}/>,
-        <NewOrderScreen getOrders={getOrders} orders={orders} defaultValue={defaultValue} value={value} setValue={setValue} serviceSettings={serviceSettings}/>,
+        <NewOrderScreen setPhotos={setPhotos} app={app} photos={photos} getOrders={getOrders} orders={orders} defaultValue={defaultValue} value={value} setValue={setValue} serviceSettings={serviceSettings}/>,
         <SettingsScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
         <GroupUsersScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
         <AdminScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,

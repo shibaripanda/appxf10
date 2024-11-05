@@ -31,6 +31,7 @@ export class OrderClass {
         this._id = order._id
         this.filial = order.filial
         this.campName = order.campName
+        this.photos = order.photos ? order.photos : []
         this.link = getLink()
     }
     

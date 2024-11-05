@@ -15,6 +15,18 @@ export class UsersController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Get('/photos/')
+    getPhotos(@Request() req: any){
+        return this.ordersService.getPhotos(req.user._id)
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('/deletephotos/')
+    deletePhotos(@Request() req: any){
+        return this.ordersService.deletePhotos(req.user._id)
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Put()
     updateUser(@Request() req: any, @Body() obj: object){
         return this.ordersService.updateUser(req.user._id, obj)

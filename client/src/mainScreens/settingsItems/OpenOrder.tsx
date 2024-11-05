@@ -1,4 +1,4 @@
-import { Button, Container, Select, SimpleGrid, Text, TextInput } from '@mantine/core'
+import { Button, Container, Grid, Image, Select, SimpleGrid, Text, TextInput } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { dateToLokalFormatFull } from '../../modules/dateToLocalFormat.js'
 import { TableOpenOrder } from '../../components/TableOpenOrder/TableOpenOrder.tsx'
@@ -401,6 +401,22 @@ export function OpenOrder(props: any) {
           <div style={{ marginTop: '2vmax', marginBottom: '2vmax'}}>
           {dataForShow()}
           </div>
+          <hr style={{marginTop: '1vmax', marginBottom: '1vmax'}}></hr>
+            
+            <Grid>
+                {props.data.photos.map(
+                    (photo, index) => <Grid.Col span={2} key={index}>
+                    <Image
+                    // onClick={
+                    //   () => props.app.sendMePhoto(photo.min)
+                    // }
+                    src={`data:image/jpeg;base64,${photo.max}`}
+                    radius="sm"
+                    h='7vmax'
+                    w="auto"
+                    />
+            </Grid.Col>)}
+            </Grid>
         </Container>
     )
 }

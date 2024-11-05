@@ -6,7 +6,10 @@ export const NewOrderScreen = (props) => {
 
     if(props.value){
        return (
-            <FeaturesGrid 
+            <FeaturesGrid
+                setPhotos={props.setPhotos}
+                app={props.app}
+                photos={props.photos} 
                 orders={props.orders} 
                 defaultValue={props.defaultValue} 
                 value={props.value} 

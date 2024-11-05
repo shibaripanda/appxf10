@@ -15,15 +15,12 @@ export class OrdersController {
     @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() orderDto: CreateOrderDto, @Request() req: any){
-        // console.log(orderDto)
-        // console.log(req.user)
         return this.ordersService.createOrder({...orderDto, manager: req.user.email}, req.user.tId, req.user._id)
     }
 
     @UseGuards(JwtAuthGuard)
     @Get(':campId')
     getAllOrders(@Param('campId') campId: string, @Request() req: any){
-        console.log('sss')
         if(req.user.campId.includes(campId)){
             return this.ordersService.getAllOrders(campId)
         }
@@ -33,7 +30,6 @@ export class OrdersController {
     @UseGuards(JwtAuthGuard)
     @Get('/activ/:campId')
     getOrdersActiv(@Param('campId') campId: string, @Request() req: any){
-        console.log('dddd')
         if(req.user.campId.includes(campId)){
             return this.ordersService.getOrdersActiv(campId)
         }

@@ -12,7 +12,6 @@ export class UsersService {
 
 
     async updateUserOrderPhoto(telegramId: any, photo: any){
-        // await this.userModelNestreact.updateOne({telegramId: telegramId}, {photos: []})
         await this.userModelNestreact.updateOne({telegramId: telegramId}, {$push: {photos: photo}})
     }
 
@@ -38,9 +37,17 @@ export class UsersService {
         return user
     }
 
+    async getPhotos(id){
+        const photos = await this.userModelNestreact.findOne({_id: id}, {photos: 1, _id: 0})
+        return photos ? photos.photos : []
+    }
+
+    async deletePhotos(id){
+        await this.userModelNestreact.updateOne({_id: id}, {photos: []})
+    }
+
     async getUser(id){
         const user = await this.userModelNestreact.findOne({_id: id}, {password: 0, emailAuthCode: 0, createdAt: 0, updatedAt: 0, __v: 0, _id: 0})
-        console.log(user)
         return user
     }
 

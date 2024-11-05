@@ -19,13 +19,9 @@ export class OrdersService {
         private botService: BotService,
         private userService: UsersService
     ) {}
-    // dto.title + ' ' + dto.firm + ' ' + dto.model + '\n' + dto.problem + '\n' + dto.info + '\n' + dto.manager + '\n' + dto.order + '\n' + dto.clientTel + '\n' + new Date(dto.date).toLocaleDateString()
     
     async createOrder(dto: CreateOrderDto, tId: any, _id: string){
-        const user = await this.userService.getUserByTelegramId(tId) //this.userService.getUser(_id)
-        const user1 = await this.userService.getUserByTelegramId(tId)
-        console.log('create ordr', user)
-        console.log('create ordr1', user1)
+        const user = await this.userService.getUser(_id)
         let order
         if(user.photos.length){
             order = await this.orderModel.create({...dto, photos: user.photos})
@@ -33,9 +29,8 @@ export class OrdersService {
         else{
             order = await this.orderModel.create({...dto, photos: []})
         }
-        console.log('befor', order.photos)
         if(tId){
-            await this.botService.newOrderTelegramMessage(tId, order, _id)
+            await this.botService.newOrderTelegramMessage(tId, order)
         }
         await this.userService.updateUser(_id, {photos: []})
         return order 
