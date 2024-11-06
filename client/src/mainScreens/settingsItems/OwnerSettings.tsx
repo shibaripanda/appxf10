@@ -12,13 +12,13 @@ export const OwnerSettings = (props: any) => {
 
     const getMySub = async () => {
         const res = await props.app.getMySubs()
-        console.log(res)
+        // console.log(res)
         setMySubCamps(res)
     }
 
    
 
-    console.log(props)
+    // console.log(props)
     return (
         <Grid justify="flex-start" align="center">
             <Grid.Col span={12}>

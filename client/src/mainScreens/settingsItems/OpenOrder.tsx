@@ -183,6 +183,7 @@ export function OpenOrder(props: any) {
           print: false,
           func: async () => {
               await historyUpdate(`Установлен статус: "${i.label}"`, i.index)
+              props.setStatus(Date.now())
           }
         })
       }

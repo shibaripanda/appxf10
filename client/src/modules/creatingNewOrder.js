@@ -7,7 +7,7 @@ export const createNewOrder = async (order) => {
     const letter = () => rendomLetteOrder()
     const date = Date.now()
 
-    console.log(sessionData('read', 'name'))
+    // console.log(sessionData('read', 'name'))
     
         return {
             ...order,

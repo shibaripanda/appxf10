@@ -70,7 +70,7 @@ export class AppClass {
     }
     async getColorApp(){
         return {
-            mainAppColor: 'grey',
+            mainAppColor: 'green',
             iconAppColor: 'black'
         }
     }
@@ -88,7 +88,7 @@ export class AppClass {
         return res.data
     }
     async sendMePhoto(orderId){
-        console.log(orderId)
+        // console.log(orderId)
         await axiosCall('POST', `${this.link}/api/orders/sendphoto/`, {campId: this.campId, orderId: orderId})
     }
     async deletePhotos(){

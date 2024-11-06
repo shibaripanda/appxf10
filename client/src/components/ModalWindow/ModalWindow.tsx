@@ -1,12 +1,13 @@
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Table, Text } from '@mantine/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { OpenOrder } from '../../mainScreens/settingsItems/OpenOrder.tsx'
 import { dateToLokalFormat } from '../../modules/dateToLocalFormat.js'
 
 export function ModalWindow(props) {
     
   const [opened, { open, close }] = useDisclosure(false)
+  const [status, setStatus] = useState(0)
 
   const titleComponent = () => {
     return (
@@ -28,7 +29,7 @@ export function ModalWindow(props) {
   
   const colorStatus = () => {
     if(props.data.status === 'new'){
-      return 'blue'
+      return 'red'
     }
     else if(props.data.status === 'process'){
       return 'black'
@@ -46,9 +47,9 @@ export function ModalWindow(props) {
       return 'grey'
     }
     else if(props.data.status === 'diagnostics'){
-      return 'purpure'
+      return 'blue'
     }
-    return 'black'
+    return 'pink'
   }
 
     return (
@@ -61,7 +62,7 @@ export function ModalWindow(props) {
             title={titleComponent()} 
             withCloseButton={false}
             >
-                <div><OpenOrder app={props.app} getOrders={props.getOrders} serviceSettings={props.serviceSettings} data={props.data} close={close}/></div>
+                <div><OpenOrder setStatus={setStatus} app={props.app} getOrders={props.getOrders} serviceSettings={props.serviceSettings} data={props.data} close={close}/></div>
             </Modal>
             <Table.Tr key={props.data.title} style={{cursor: 'pointer', color: colorStatus()}} onClick={() => open()}>
             {props.row}

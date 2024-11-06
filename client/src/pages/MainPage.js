@@ -106,16 +106,14 @@ function MainPage() {
           setPhotos(ph)
         }
         else{
-          console.log('pause update orders')
+          // console.log('pause update orders')
         }
         sessionStorage.setItem('interval', int)
       }, await app.timeUpdate())
   }
 
   const getPhotos = async () => {
-    // console.log(await app.getOrdersActiv())
     const res = await app.getPhotos()
-    // console.log(res)
     setPhotos(res ? res : [])
   }
 
