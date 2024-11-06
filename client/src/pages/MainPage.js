@@ -115,7 +115,7 @@ function MainPage() {
   const getPhotos = async () => {
     // console.log(await app.getOrdersActiv())
     const res = await app.getPhotos()
-    console.log(res)
+    // console.log(res)
     setPhotos(res ? res : [])
   }
 

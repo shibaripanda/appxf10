@@ -8,7 +8,7 @@ import { sessionData } from '../../modules/sessionData.js'
 
 export function OpenOrder(props: any) {
 
-  console.log(props.data)
+  // console.log(props.data)
 
     const [newInfo, setNewInfo] = useState('')
     const [service, setService] = useState({service: '', price: 0, master: '', varant: 0, sebes: 0})
@@ -47,10 +47,7 @@ export function OpenOrder(props: any) {
 
     const printBut = (but, index) => {
       if(but.print){
-        // console.log('but ',but.format)
-          // if(!but.disabled){
-              return <ModalWindowPrint color={but.color} key={index} disabled={but.disabled} label={but.title} format={but.format} handler={but.func} data={props.data} settings={props.serviceSettings}/>
-          // }
+        return <ModalWindowPrint color={but.color} key={index} disabled={but.disabled} label={but.title} format={but.format} handler={but.func} data={props.data} settings={props.serviceSettings}/>
       }
       return <Button color={but.color} disabled={but.disabled} key={index} onClick={() => but.func()}>{but.title}</Button>
     }
@@ -125,8 +122,9 @@ export function OpenOrder(props: any) {
         },
         }
       ]
-      const role: string = sessionData('read', 'role')
-      if(['user', 'manager', 'master'].includes(role)){
+      let role = sessionData('read', 'role')
+      if(!role) role = 'df'
+      if(['user', 'manager', 'master'].includes(role.toString())){
         arrayButtons = arrayButtonsUserManagerMaster
       }
       for(let i of props.serviceSettings.generalStatusList.filter(item => ['cancel', 'close', 'new', 'warranty'].includes(item.index))){
@@ -145,7 +143,7 @@ export function OpenOrder(props: any) {
       }
 
       const inputForDelete = () => {
-        if(!['user', 'manager', 'master'].includes(role)){
+        if(!['user', 'manager', 'master'].includes(role.toString())){
           return (
               <TextInput
                 placeholder={props.data.order}

@@ -23,7 +23,7 @@ export class AuthService {
 
     async login(userDto: CreateUserDto){
         const user = await this.usersService.getUserByEmail(userDto.email)
-        console.log(userDto)
+        // console.log(userDto)
         if(user){
             const code = rendomNumberOrder()
             await this.usersService.updateUser({_id: user._id}, {emailAuthCode: {code: String(code), time: Date.now(), step: 1, name: false}})
@@ -32,7 +32,7 @@ export class AuthService {
         }
         else{
             const newUsers = await this.campService.searchNewUser(userDto.email)
-            console.log(newUsers)
+            // console.log(newUsers)
             if(newUsers.length){
                 const code = rendomNumberOrder()
                 const hashPassword = await bcrypt.hash('password', 7)
@@ -87,7 +87,7 @@ export class AuthService {
     private async generateToken(user: User){
         // const ownerCamps = await this.campService.getCampsByOwnerEmail({users: {$elemMatch: {email: user.email}}}) //{owner: user.email}
         const ownerCamps = await this.campService.getCampsByOwnerEmail(user) //{owner: user.email}
-        console.log(ownerCamps)
+        // console.log(ownerCamps)
         const payload = {email: user.email, _id: user._id, campId: ownerCamps, tId: user.telegramId}
         return {
             token: this.jwtService.sign(payload), email: user.email, name: user.name ? user.name : 'noname'
