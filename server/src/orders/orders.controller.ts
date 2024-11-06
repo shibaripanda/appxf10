@@ -19,6 +19,16 @@ export class OrdersController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Post('/sendphoto/')
+    sendPhotosToTelegram(@Body() obj: any, @Request() req: any){
+        console.log(obj)
+        // console.log(req.user.tId)
+        if(req.user.campId.includes(obj.campId) && req.user.tId){
+            this.ordersService.sendPhotosToTelegram(obj.campId, obj.orderId, req.user.tId)
+        }
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Get(':campId')
     getAllOrders(@Param('campId') campId: string, @Request() req: any){
         if(req.user.campId.includes(campId)){

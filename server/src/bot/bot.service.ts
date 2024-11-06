@@ -53,14 +53,15 @@ import { OrdersService } from 'src/orders/orders.service';
     // async help(@Ctx() ctx: TelegrafContext) {
     //   await ctx.reply('Send me a sticker');
     // }
-  
+
     @On('photo')
     async on(@Ctx() ctx: any) {
-        const url = await this.bot.telegram.getFileLink(ctx.message.photo[0].file_id)
+      // console.log(ctx.message.photo)
+        const url = await this.bot.telegram.getFileLink(ctx.message.photo[1].file_id)
         const buffer = await (await fetch(url.href)).arrayBuffer()
         // await this.mongoBot.updateOne({$addToSet: {content: {type: 'photo', media: data, tx: caption ? caption : '', buffer: Buffer.from(buffer).toString('base64')}}})
-        await this.userService.updateUserOrderPhoto(ctx.from.id, {type: 'photo', media: ctx.message.photo[0].file_id, max: Buffer.from(buffer).toString('base64')})
-        await ctx.reply('ok')
+        await this.userService.updateUserOrderPhoto(ctx.from.id, {type: 'photo', media: ctx.message.photo[3].file_id, max: Buffer.from(buffer).toString('base64')})
+        // await ctx.reply('ok')
     }
   
     // @Hears('hi')

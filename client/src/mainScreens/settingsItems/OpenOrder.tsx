@@ -405,9 +405,9 @@ export function OpenOrder(props: any) {
                 {props.data.photos.map(
                     (photo, index) => <Grid.Col span={2} key={index}>
                     <Image
-                    // onClick={
-                    //   () => props.app.sendMePhoto(photo.min)
-                    // }
+                    onClick={
+                      () => props.app.sendMePhoto(props.data._id)
+                    }
                     src={`data:image/jpeg;base64,${photo.max}`}
                     radius="sm"
                     h='7vmax'

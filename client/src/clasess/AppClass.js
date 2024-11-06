@@ -87,10 +87,10 @@ export class AppClass {
         const res = await axiosCall('GET', `${this.link}/api/users/photos/`, {})
         return res.data
     }
-    // async sendMePhoto(photo){
-    //     const res = await axiosCall('GET', `${this.link}/api/users/photos/`, {})
-    //     return res.data
-    // }
+    async sendMePhoto(orderId){
+        console.log(orderId)
+        await axiosCall('POST', `${this.link}/api/orders/sendphoto/`, {campId: this.campId, orderId: orderId})
+    }
     async deletePhotos(){
         await axiosCall('GET', `${this.link}/api/users/deletephotos/`, {})
     }

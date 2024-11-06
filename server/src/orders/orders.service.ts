@@ -41,6 +41,11 @@ export class OrdersService {
         return order
     }
 
+    async sendPhotosToTelegram(campId, orderId, tId){
+        const order = await this.orderModel.findOne({_id: orderId, campId: campId})
+        await this.botService.newOrderTelegramMessage(tId, order)
+    }
+
     async deleteOrder(orderId){
         const orders = await this.orderModel.deleteOne({_id: orderId})
         return orders
