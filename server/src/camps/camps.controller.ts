@@ -91,4 +91,10 @@ export class CampsController {
     editUserRole(@Param('campId') campId: string, @Body() obj: object){
         return this.campsService.editUserRole(campId, obj)
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Put('/editUsertelegramreminder/:campId')
+    editUserTelegramReminder(@Param('campId') campId: string, @Body() obj: object){
+        return this.campsService.editUserTelegramReminder(campId, obj)
+    }
 }

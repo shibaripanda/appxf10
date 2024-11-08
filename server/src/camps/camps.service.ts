@@ -106,6 +106,7 @@ export class CampsService {
         const userName = await this.usersService.findUsersName(res.map(item => item['email']))
         for(const i of res){
             i.name = (userName.find(item => item.email === i.email))?.name ? (userName.find(item => item.email === i.email))?.name : 'noname'
+            i.telegramStatus = (userName.find(item => item.email === i.email))?.telegramId ? true : false
         }
         return res
     }
@@ -115,6 +116,13 @@ export class CampsService {
     async editUserRole(campId: string, obj: object){
         console.log(obj)
         await this.campModel.updateOne({_id: campId}, { $set: { 'users.$[el].role': obj['role']} },{
+            arrayFilters: [{ 'el.email': obj['email'] }],
+            new: true
+         })
+    }
+    async editUserTelegramReminder(campId: string, obj: object){
+        // console.log(obj)
+        await this.campModel.updateOne({_id: campId}, { $set: { 'users.$[el].telegramReminder': obj['telegramReminder']} },{
             arrayFilters: [{ 'el.email': obj['email'] }],
             new: true
          })

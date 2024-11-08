@@ -29,10 +29,19 @@ export class OrdersService {
         else{
             order = await this.orderModel.create({...dto, photos: []})
         }
-        if(tId){
-            await this.botService.newOrderTelegramMessage(tId, order)
-        }
+        // if(tId){
+        //     await this.botService.newOrderTelegramMessage(tId, order)
+        // }
         await this.userService.updateUser(_id, {photos: []})
+        const campUsers = await this.campService.getUsersOfCamp(order.campId)
+        for (const i of campUsers){
+            if(i.telegramReminder.length && i.telegramReminder.includes(order.title)){
+                const user = await this.userService.getUserByEmail(i.email)
+                if(user.telegramId){
+                   await this.botService.newOrderTelegramMessage(user.telegramId, order) 
+                } 
+            }
+        }
         return order 
     }
 

@@ -44,6 +44,9 @@ export class AppClass {
     async editUserRole(obj){
         await axiosCall('PUT', `${this.link}/api/edituserrole/${this.campId}`, obj)
     }
+    async editUserTelegramReminder(obj){
+        await axiosCall('PUT', `${this.link}/api/editUsertelegramreminder/${this.campId}`, obj)
+    }
     async deleteUserFromCamp(obj){
         await axiosCall('PUT', `${this.link}/api/deleteuserfromcamp/${this.campId}`, obj)
     }

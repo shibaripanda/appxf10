@@ -8,7 +8,8 @@ export const UsersSchema = new mongoose.Schema({
   telegramtoken: {type: String},
   telegramId: {type: Number},
   currentOrderMedia: {type: String},
-  photos: {type: Array}
+  photos: {type: Array},
+  reminderToTelegram: {type: Array, default: []}
 }, {timestamps: true})
 
 export interface User {
@@ -20,5 +21,6 @@ export interface User {
   telegramtoken: string,
   telegramId: number,
   _id: any,
+  reminderToTelegram: [],
   photos: []
 }

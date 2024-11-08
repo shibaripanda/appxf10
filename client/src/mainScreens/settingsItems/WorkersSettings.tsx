@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { LoaderItem } from "../../components/Loader/LoaderItem.tsx"
-import { TextInput, Container, Button, SimpleGrid, Select, Card } from '@mantine/core'
+import { TextInput, Container, Button, SimpleGrid, Select, Card, Checkbox} from '@mantine/core'
 import { validateEmail } from "../../modules/validateEmail.js"
 
 export const WorkersSettings = (props) => {
@@ -8,6 +8,7 @@ export const WorkersSettings = (props) => {
     const [users, setUsers] = useState([])
     const [role, setRole] = useState('')
     const [email, setEmail] = useState('')
+    // const [valueReminder, setValueReminder] = useState(users)
 
     
     useEffect(() => {
@@ -16,6 +17,7 @@ export const WorkersSettings = (props) => {
     
     const getUsers = async () => {
         const res = await props.app.getUsersOfCamp()
+        console.log(res)
         setUsers(res.reverse())
     }
     const activBut = () => {
@@ -45,7 +47,21 @@ export const WorkersSettings = (props) => {
                     />
             )
         }
-    } 
+    }
+    const reninderSettings = (users, user) => {
+        if(user.telegramStatus){
+            return <Checkbox.Group 
+                value={users.find(item => item.email === user['email'])['telegramReminder']} 
+                onChange={async (event) => {
+                    console.log(event)
+                    await props.app.editUserTelegramReminder({email: user.email, telegramReminder: event})
+                    await getUsers()
+                }}
+                >
+                {props.serviceSettings.generalDeviceList.map((rem, index) => <Checkbox key={index} value={rem.request} label={rem.label} />)}
+                </Checkbox.Group>
+        }
+    }
 
     if(users.length){
         return (
@@ -85,7 +101,22 @@ export const WorkersSettings = (props) => {
                             {`(${item['role']})`}
                         </div>
                             {`${item['name']}`}
+                        <div>
+                            <div>
+                                <hr style={{marginTop: '1.5vmax'}}></hr>
+                            </div>
+                        Получать уведомление о новом заказе:
+                        </div>
+                        <div>
+                        {reninderSettings(users, item)}
+                        </div>
+                        <div>
+                                <hr style={{marginTop: '1.5vmax'}}></hr>
+                            </div>    
                         {showRoleEdit(item)}
+                        <div>
+                                <hr style={{marginTop: '3vmax'}}></hr>
+                            </div>
                         <Button 
                             fullWidth 
                             mt="sm" 

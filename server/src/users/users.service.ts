@@ -61,7 +61,7 @@ export class UsersService {
     }
 
     async findUsersName(arr: []){
-        return await this.userModelNestreact.find({email: arr}, {_id: 0, email: 1, name: 1})
+        return await this.userModelNestreact.find({email: arr}, {_id: 0, email: 1, name: 1, telegramId: 1})
     }
 
 }
