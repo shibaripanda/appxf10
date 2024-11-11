@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "app": "concurrently \"(npm run start --prefix client)\" \"(npm run start:dev --prefix server)\"",
-    "upnpm": "npm i && cd server && npm i && cd .. && cd client && npm i && cd .."
+    "upnpm": "npm i && cd server && npm i && cd .. && cd client && npm i && cd ..",
+    "gitup": "git add . && git commit -m 'home' && git push origin main"
   },
   "author": "",
   "license": "ISC",
