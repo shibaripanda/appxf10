@@ -14,6 +14,6 @@ export interface App {
 interface LengResult {
   [key: string]: string
 }
-interface NewLengPack {
+export interface NewLengPack {
   [key: string]: LengResult
 }

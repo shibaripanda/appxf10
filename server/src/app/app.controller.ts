@@ -1,12 +1,20 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { NewLengPack } from './app.model';
+import { lengs } from 'src/modules/lenguages/allText';
 
-@Controller()
+@Controller('/api/app')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  // @Get()
-  // getHello(): string {
-  //   return this.appService.getHello();
-  // }
+  @Get('/text/')
+  async getText(): Promise<NewLengPack>{
+    return await this.appService.getText()
+  }
+
+  @Get('/avlengs/')
+  async getAvailableLanguages(): Promise<object[]> {
+    return lengs
+  }
+
 }

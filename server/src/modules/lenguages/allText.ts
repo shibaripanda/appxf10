@@ -6,10 +6,11 @@ interface LengData {
 
 export const textArray: LengData[] = [
     {rutext: 'Привет', index: 'hello', info_data: 'приветствие'},
-    // {rutext: 'Пока', index: 'Bye', info_data: 'пока'},
-    // {rutext: 'Заказы', index: 'order', info_data: 'заказы'},
-    // {rutext: 'Удалить', index: 'delete', info_data: 'удалить'},
-    // {rutext: 'Новый заказ', index: 'New order', info_data: 'новый заказ'}
+    {rutext: 'Добро пожаловать', index: 'welcom', info_data: 'добро пожаловать'},
+    {rutext: 'Создать сервис', index: 'createservice', info_data: 'создать сервис'},
+    {rutext: 'Еще нет сервиса?', index: 'DoNotHaveAServiceYet', info_data: 'еще нет сервиса'},
+    {rutext: 'Получить пароль', index: 'GetPassword', info_data: 'получить пароль'},
+    {rutext: 'Некорректный', index: 'errorInputEmail', info_data: 'некоректный'}, 
 ]
 
 interface LengDataStart {

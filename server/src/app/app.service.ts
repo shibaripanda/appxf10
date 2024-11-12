@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose';
-import { App } from './app.model';
+import { App, NewLengPack } from './app.model';
 import { Model } from 'mongoose';
 import { getLenguagesFromAI } from 'src/modules/lenguages/lengPackUpdate';
 import { lengs, textArray } from 'src/modules/lenguages/allText';
@@ -14,6 +14,16 @@ export class AppService {
   async onApplicationBootstrap() {
     await this.updateAppText()
   }
+
+  async getText(): Promise<NewLengPack>{
+     const app = await this.appModel.findOne({mainServerAppSettings: 'mainServerAppSettings'}, {text: 1, _id: 0})
+     return app.text
+  }
+
+  // async getAvailableLenguage(): Promise<NewLengPack>{
+  //   const app = await this.appModel.findOne({mainServerAppSettings: 'mainServerAppSettings'}, {text: 1, _id: 0})
+  //   return app.text
+  // }
 
   async getMainServerAppSettings(){
     return await this.appModel.findOneAndUpdate({mainServerAppSettings: 'mainServerAppSettings'}, {$inc: {restartCount: 1}}, {upsert: true, returnDocument: 'after'})

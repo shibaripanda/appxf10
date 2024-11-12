@@ -80,6 +80,15 @@ export class AppClass {
     async getAppText(){
         return (await axiosCall('GET', `${this.link}/api/fix/text`, {})).data
     }
+
+    async getText(){
+        return (await axiosCall('GET', `${this.link}/api/app/text`, {})).data
+    }
+
+    async getAvailableLanguages(){
+        return (await axiosCall('GET', `${this.link}/api/app/avlengs`, {})).data
+    }
+
     async timeUpdate(){
         return this.time
     }

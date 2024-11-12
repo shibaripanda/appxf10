@@ -26,16 +26,43 @@ function AuthPage() {
   const [serverError, setServerError] = useState('')
   const [leng, setLeng] = useState('en')
   
+
+  const [text2, setText2] = useState(false)
+  const [avLeng, setAvLeng] = useState(false)
+  
   const auth = new AuthClass()
   const app = new AppClass()
 
+  const [leng2, setLeng2] = useState('en')
+
   useEffect(() => {
+
     getText()
+    getText2()
+    userLenguage()
   }, [])
 
   const getText = async () => {
     setText(await app.getAppText())
   }
+
+  async function userLenguage(){
+    const l = window.navigator.language.substring(0,2) ? window.navigator.language.substring(0,2) : 'en'
+    console.log(l)
+    const avLengs = await app.getAvailableLanguages()
+    setAvLeng(avLengs)
+    if(!avLengs.map(item => item.index).includes(l)){
+      setLeng2('en')
+    }
+    else{
+      setLeng2(l)
+    }
+  }
+
+  const getText2 = async () => {
+    setText2(await app.getText())
+  }
+
   const startRequest = async () => {
     await auth.startRequest({email: email})
     .then((res) => {
@@ -91,7 +118,7 @@ function AuthPage() {
     }
     else{
       setActivBotton(false)
-      setErrorInputData(text.badEmail)
+      setErrorInputData(text2.errorInputEmail[leng2])
     }
   }
   const setValidatedPassword = (password) => {
@@ -109,7 +136,7 @@ function AuthPage() {
     }
     else{
       setActivBotton(false)
-      setErrorInputData(text.badPassword)
+      setErrorInputData(text2.errorInputEmail[leng2])
     }
   }
   const setValidatedNameNew = (name) => {
@@ -127,7 +154,7 @@ function AuthPage() {
     }
     else{
       setActivBottonName(false)
-      setErrorInputName(text.badServiceName)
+      setErrorInputName(text2.errorInputEmail[leng2])
     }
   }
   const getMyCamps = async () => {
@@ -147,14 +174,16 @@ function AuthPage() {
     navigate('/main')
   }
 
-  if(step === 1 && text){
+  if(step === 1 && text && text2 && leng2){
       return (
             <div>
               <AuthenticationEmail
-              leng={leng}
+              setLeng={setLeng2}
+              leng={leng2}
+              text={text2}
+              avLeng={avLeng}
               serverError={serverError} 
-              setStep={stepSet} 
-              text={text} 
+              setStep={stepSet}
               setEmail={setValidatedEmail} 
               clickOnBut={startRequest} 
               errorInputData={errorInputData} 
