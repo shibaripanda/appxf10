@@ -7,6 +7,7 @@ import {
     Button,
     PasswordInput,
   } from '@mantine/core';
+import { LanguagePicker } from '../LanguagePicker/LanguagePicker.tsx';
   
   export function AuthenticationPassword(props) {
 
@@ -14,13 +15,13 @@ import {
       if(props.activBotton){
         return (
           <Button fullWidth mt="xl" onClick={() => props.clickOnBut()}>
-          {props.text.Enter}
+          {props.text.enter[props.leng]}
           </Button>
         )
       }
       return (
         <Button fullWidth mt="xl" onClick={() => props.clickOnBut()} disabled>
-          {props.text.Enter}
+          {props.text.enter[props.leng]}
         </Button>
       )
     }
@@ -28,9 +29,9 @@ import {
     return (
       <Container size={420} my={40}>
         <Text c="dimmed" size="sm" ta="center" mt={5}>
-          {props.text.passwordSentToEmail}{'. '}
+          {props.text.emailToEmail[props.leng]}{'. '}
           <Anchor size="sm" component="button" onClick={() => props.setStep(1)}>
-            {props.text.back}
+            {props.text.back[props.leng]}
           </Anchor>
         </Text>
   
@@ -38,6 +39,9 @@ import {
           <PasswordInput label="Password" placeholder="Your password" required mt="md" onChange={event => {props.setPassword(event.currentTarget.value)}} error={props.errorInputData}/>
           {botton()}
         </Paper>
+        <div style={{marginTop: '1.3vmax'}}>
+        <LanguagePicker avLeng={props.avLeng} setLeng={props.setLeng} leng={props.leng}/>
+      </div>
       </Container>
     );
   }

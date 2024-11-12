@@ -1,22 +1,21 @@
-import '@mantine/core/styles.css';
-import { useEffect, useState } from 'react';
-import { AuthenticationPassword } from '../components/Auth/AuthenticationPassword.tsx';
-import { AuthenticationEmail } from '../components/Auth/AuthenticationEmail.tsx';
-import { validateEmail } from '../modules/validateEmail.js';
-import { AuthenticationNew } from '../components/Auth/AuthenticationNew.tsx';
-import { LoaderItem } from '../components/Loader/LoaderItem.tsx';
-import { useNavigate } from 'react-router-dom';
-import { CampSelect } from '../components/Auth/CampSelect.tsx';
-import { sessionData } from '../modules/sessionData.js';
-import { AuthClass } from '../clasess/AuthClass.js';
-import { AppClass } from '../clasess/AppClass.js';
+import '@mantine/core/styles.css'
+import { useEffect, useState } from 'react'
+import { AuthenticationPassword } from '../components/Auth/AuthenticationPassword.tsx'
+import { AuthenticationEmail } from '../components/Auth/AuthenticationEmail.tsx'
+import { validateEmail } from '../modules/validateEmail.js'
+import { AuthenticationNew } from '../components/Auth/AuthenticationNew.tsx'
+import { LoaderItem } from '../components/Loader/LoaderItem.tsx'
+import { useNavigate } from 'react-router-dom'
+import { CampSelect } from '../components/Auth/CampSelect.tsx'
+import { sessionData } from '../modules/sessionData.js'
+import { AuthClass } from '../clasess/AuthClass.js'
+import { AppClass } from '../clasess/AppClass.js'
 
 function AuthPage() {
   const navigate = useNavigate()
   const [camps, setCamps] = useState([])
   const [step, setStep] = useState(1)
   const [newServiceName, setNewServiceName] = useState(false)
-  const [text, setText] = useState(false)
   const [email, setEmail] = useState(false)
   const [password, setPassword] = useState(false)
   const [errorInputData, setErrorInputData] = useState('')
@@ -24,45 +23,39 @@ function AuthPage() {
   const [activBotton, setActivBotton] = useState(false)
   const [activBottonName, setActivBottonName] = useState(false)
   const [serverError, setServerError] = useState('')
-  const [leng, setLeng] = useState('en')
-  
-
-  const [text2, setText2] = useState(false)
+  const [text, setText] = useState(false)
   const [avLeng, setAvLeng] = useState(false)
   
   const auth = new AuthClass()
   const app = new AppClass()
 
-  const [leng2, setLeng2] = useState('en')
+  const [leng, setLengx] = useState('en')
 
   useEffect(() => {
-
     getText()
-    getText2()
     userLenguage()
   }, [])
 
-  const getText = async () => {
-    setText(await app.getAppText())
-  }
-
   async function userLenguage(){
-    const l = window.navigator.language.substring(0,2) ? window.navigator.language.substring(0,2) : 'en'
-    console.log(l)
+    const systemLenguage = window.navigator.language.substring(0,2) ? window.navigator.language.substring(0,2) : 'en'
     const avLengs = await app.getAvailableLanguages()
     setAvLeng(avLengs)
-    if(!avLengs.map(item => item.index).includes(l)){
-      setLeng2('en')
+    if(!avLengs.map(item => item.index).includes(systemLenguage)){
+      setLeng('en')
     }
     else{
-      setLeng2(l)
+      setLeng(systemLenguage)
     }
   }
 
-  const getText2 = async () => {
-    setText2(await app.getText())
+  const setLeng = (lenguage) => {
+    sessionData('write', 'leng', lenguage)
+    setLengx(lenguage)
   }
 
+  const getText = async () => {
+    setText(await app.getText())
+  }
   const startRequest = async () => {
     await auth.startRequest({email: email})
     .then((res) => {
@@ -118,7 +111,7 @@ function AuthPage() {
     }
     else{
       setActivBotton(false)
-      setErrorInputData(text2.errorInputEmail[leng2])
+      setErrorInputData(text.errorInputEmail[leng])
     }
   }
   const setValidatedPassword = (password) => {
@@ -136,7 +129,7 @@ function AuthPage() {
     }
     else{
       setActivBotton(false)
-      setErrorInputData(text2.errorInputEmail[leng2])
+      setErrorInputData(text.errorInputEmail[leng])
     }
   }
   const setValidatedNameNew = (name) => {
@@ -154,7 +147,7 @@ function AuthPage() {
     }
     else{
       setActivBottonName(false)
-      setErrorInputName(text2.errorInputEmail[leng2])
+      setErrorInputName(text.errorInputEmail[leng])
     }
   }
   const getMyCamps = async () => {
@@ -174,13 +167,13 @@ function AuthPage() {
     navigate('/main')
   }
 
-  if(step === 1 && text && text2 && leng2){
+  if(step === 1 && text && leng && avLeng){
       return (
             <div>
               <AuthenticationEmail
-              setLeng={setLeng2}
-              leng={leng2}
-              text={text2}
+              setLeng={setLeng}
+              leng={leng}
+              text={text}
               avLeng={avLeng}
               serverError={serverError} 
               setStep={stepSet}
@@ -190,14 +183,17 @@ function AuthPage() {
               activBotton={activBotton}
               />
             </div>
-      );
+      )
   }
   else if(step === 2){
     return (
           <div>
-            <AuthenticationPassword 
-            setStep={stepSet} 
-            text={text} 
+            <AuthenticationPassword
+            setLeng={setLeng}
+            leng={leng}
+            text={text}
+            avLeng={avLeng}
+            setStep={stepSet}
             setPassword={setValidatedPassword} 
             clickOnBut={startPasswordRequest} 
             errorInputData={errorInputData} 
@@ -209,9 +205,12 @@ function AuthPage() {
   else if(step === 3){
     return (
           <div>
-            <AuthenticationNew 
-            setStep={stepSet} 
-            text={text} 
+            <AuthenticationNew
+            setLeng={setLeng}
+            leng={leng}
+            text={text}
+            avLeng={avLeng}
+            setStep={stepSet}
             setValidatedNameNew={setValidatedNameNew}  
             setEmail={setValidatedEmail}
             errorInputData={errorInputData}
@@ -231,8 +230,11 @@ function AuthPage() {
       return (
         <div>
           <CampSelect
-          camps={camps}
+          setLeng={setLeng}
+          leng={leng}
           text={text}
+          avLeng={avLeng}
+          camps={camps}
           clickOnBut={selectCamp}
           setStep={setStep} 
           />
@@ -254,4 +256,4 @@ function AuthPage() {
 
 }
 
-export default  AuthPage;
+export default  AuthPage

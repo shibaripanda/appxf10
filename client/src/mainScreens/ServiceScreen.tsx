@@ -19,7 +19,7 @@ export const ServiceScreen = (props) => {
   }
   else if(props.orders.length === 0){
     return (
-    <div className={'mainScreenLoader'}>{props.text.youDontHaveOrders}</div>
+    <div className={'mainScreenLoader'}>{props.text.youDontHaveOrders[props.leng]}</div>
     )
   }
   return (

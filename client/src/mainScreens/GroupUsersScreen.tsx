@@ -8,7 +8,7 @@ export const GroupUsersScreen = (props: any) => {
     if(props){
        return (
             <div>
-                <SettingsItem title={props.text.workers} body={<WorkersSettings app={props.app} serviceSettings={props.serviceSettings}/>}/>
+                <SettingsItem title={props.text.workers[props.leng]} body={<WorkersSettings app={props.app} serviceSettings={props.serviceSettings}/>}/>
             </div>
         ) 
     }

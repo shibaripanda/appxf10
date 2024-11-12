@@ -59,6 +59,9 @@ export class AppClass {
     async getRole(){
         return sessionData('read', 'role')
     }
+    getLeng(){
+        return sessionData('read', 'leng')
+    }
     async getCurrentUser(){
         return sessionData('read', 'currentUser')
     }

@@ -7,6 +7,9 @@ export const sessionData = (forward, item, data) => {
         else if(item === 'campId'){
             sessionStorage.setItem(item, data)
         }
+        else if(item === 'leng'){
+            sessionStorage.setItem(item, data)
+        }
         else if(item === 'role'){
             sessionStorage.setItem(item, data)
         }
@@ -28,6 +31,9 @@ export const sessionData = (forward, item, data) => {
         }
         else if(item === 'currentUser'){
             return sessionStorage.getItem('currentUser')
+        }
+        else if(item === 'leng'){
+            return sessionStorage.getItem('leng')
         }
         else if(item === 'email'){
             return sessionStorage.getItem('currentUser').split('#')[0]

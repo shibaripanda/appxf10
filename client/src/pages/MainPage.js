@@ -35,8 +35,10 @@ function MainPage() {
   const [orders, setOrders] = useState([])
   const [subCamp, setSubCamp] = useState('')
   const [photos, setPhotos] = useState([])
-
   const app = new AppClass()
+  const [leng] = useState(app.getLeng())
+
+  
 
   const defaultValue = (r) => {
     const obj = {}
@@ -75,8 +77,9 @@ function MainPage() {
     })
   })
   useEffect(() => {
+    console.log(app.getLeng())
     const navi = async () => {
-      if(!await app.getCurrentUser() || !await app.getCampId() || !await app.getRole()){
+      if(!await app.getCurrentUser() || !await app.getCampId() || !await app.getRole() || !app.getLeng()){
         navigate('/')
       }
       else{
@@ -123,8 +126,7 @@ function MainPage() {
     setOrders(res.sort((a, b) => b.date - a.date))
   }
   const getText = async () => {
-    const res = await app.getAppText()
-    setText(res)
+    setText(await app.getText())
   }
   const getFixServiceSettings = async () => {
     const res = await app.fixServiceSettings()
@@ -136,7 +138,7 @@ function MainPage() {
     document.title = 'ServiceXF ' + res.documents.namecomp.text
   }
   const getNavBar = async () => {
-    const res = await fixNavBarItems()
+    const res = await fixNavBarItems(text, leng)
     setNavBar(res)
   }
   const getAppColor = async () => {
@@ -149,12 +151,12 @@ function MainPage() {
     const screen = () => {
       
       const listScreens = [
-        <ServiceScreen app={app} getOrders={getOrders} text={text} orders={orders} setOrders={setOrders} filter={filter} serviceSettings={serviceSettings} newSet={newSet} textFilter={textFilter}/>,
-        <NewOrderScreen setPhotos={setPhotos} app={app} photos={photos} getOrders={getOrders} orders={orders} defaultValue={defaultValue} value={value} setValue={setValue} serviceSettings={serviceSettings}/>,
-        <SettingsScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
-        <GroupUsersScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
-        <AdminScreen app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
-        <OwnerScreen app={app} text={text} subCamp={subCamp} setSubCamp={setSubCamp}/>,
+        <ServiceScreen leng={leng} app={app} getOrders={getOrders} text={text} orders={orders} setOrders={setOrders} filter={filter} serviceSettings={serviceSettings} newSet={newSet} textFilter={textFilter}/>,
+        <NewOrderScreen leng={leng} setPhotos={setPhotos} app={app} photos={photos} getOrders={getOrders} orders={orders} defaultValue={defaultValue} value={value} setValue={setValue} serviceSettings={serviceSettings}/>,
+        <SettingsScreen leng={leng} app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
+        <GroupUsersScreen leng={leng} app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
+        <AdminScreen leng={leng} app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
+        <OwnerScreen leng={leng} app={app} text={text} subCamp={subCamp} setSubCamp={setSubCamp}/>,
       ]
       if(listScreens.length !== navBar.top.length){
         console.log('Какойто пиздец, Навбаров не столько сколько скринов!!!')
@@ -176,7 +178,9 @@ function MainPage() {
           {screen()}
         </div>
         <div className={'NavBar'}>
-          <NavbarMinimalColored 
+          <NavbarMinimalColored
+          text={text}
+          leng={leng} 
           active={active} 
           setActive={setActive} 
           navBar={{...navBar, top: navBar.top.filter(item => item.role.includes(sessionData('read', 'role')))}} 

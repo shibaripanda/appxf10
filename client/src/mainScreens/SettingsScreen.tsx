@@ -10,7 +10,7 @@ export const SettingsScreen = (props: any) => {
        return (
             <div>
                 <SettingsItem 
-                    title={props.text.settingsMainTable} 
+                    title={props.text.settingsMainTable[props.leng]} 
                     body={<ColmsMainTable
                             app={props.app} 
                             serviceSettings={props.serviceSettings} 
@@ -18,7 +18,7 @@ export const SettingsScreen = (props: any) => {
                         />}
                 />
                 <SettingsItem
-                    title={props.text.UserSettings} 
+                    title={props.text.UserSettings[props.leng]} 
                     body={<UserSettings app={props.app}/>}
                 />
             </div>

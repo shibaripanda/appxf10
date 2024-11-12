@@ -11,7 +11,7 @@ import {
   import classes from './AuthenticationTitle.module.css';
   import { useNavigate } from 'react-router-dom';
   import { sessionData } from '../../modules/sessionData';
-  import { getRole } from '../../modules/getRole';
+  // import { getRole } from '../../modules/getRole';
   
   export function CampSelect(props) {
     const navigate = useNavigate()
@@ -37,11 +37,11 @@ import {
     return (
       <Container size={420} my={40}>
         <Title ta="center" className={classes.title}>
-          {props.text.YourCampanies}
+          {props.text.services[props.leng]}
         </Title>
         <Text c="dimmed" size="sm" ta="center" mt={5}>
           <Anchor size="sm" component="button" onClick={() => props.setStep(3)}>
-            {props.text.CreateService}
+            {props.text.createservice[props.leng]}
           </Anchor>
         </Text>
   

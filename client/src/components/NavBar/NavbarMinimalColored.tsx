@@ -2,7 +2,7 @@ import React from 'react';
 import { Tooltip, UnstyledButton, Stack } from '@mantine/core';
 import classes from './NavbarMinimalColored.module.css';
 import { useNavigate } from 'react-router-dom';
-import { IconLineDotted } from '@tabler/icons-react';
+// import { IconLineDotted } from '@tabler/icons-react';
 
 export function NavbarMinimalColored(props) {
   const navigate = useNavigate()

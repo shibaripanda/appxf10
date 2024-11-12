@@ -78,7 +78,7 @@ export function AuthenticationEmail(props) {
         {botton()}
         {fastBottons()}
       </Paper>
-      <div style={{marginTop: '2vmax'}}>
+      <div style={{marginTop: '1.3vmax'}}>
         <LanguagePicker avLeng={props.avLeng} setLeng={props.setLeng} leng={props.leng}/>
       </div>
     </Container>

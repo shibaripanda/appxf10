@@ -12,11 +12,14 @@ import {
 import { sessionData } from '../modules/sessionData';
 
 
-export const fixNavBarItems = async () => {
+export const fixNavBarItems = async (text, leng) => {
+  console.log(text)
+  console.log(leng)
 
     return {
       top: [
-        { icon: IconHome, label: 'Service',         role: ['owner', 'supermanager', 'manager', 'master']},
+        // { icon: IconHome, label: 'Service',         role: ['owner', 'supermanager', 'manager', 'master']},
+        { icon: IconHome, label: text.services[leng],         role: ['owner', 'supermanager', 'manager', 'master']},
         { icon: IconCirclePlus, label: 'New Order', role: ['owner', 'supermanager', 'manager'] },
         { icon: IconUser, label: 'Settings',        role: ['owner', 'supermanager', 'manager'] },
         { icon: IconUsersGroup, label: 'Users',     role: ['owner', 'supermanager'] },

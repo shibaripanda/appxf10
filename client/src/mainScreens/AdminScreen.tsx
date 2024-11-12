@@ -8,7 +8,7 @@ export const AdminScreen = (props: any) => {
     if(props){
        return (
             <div>
-                <SettingsItem title={props.text.CampSettings} body={<CampSettings  app={props.app} serviceSettings={props.serviceSettings} setServiceSettings={props.setServiceSettings}/>}/>
+                <SettingsItem title={props.text.CampSettings[props.leng]} body={<CampSettings  app={props.app} serviceSettings={props.serviceSettings} setServiceSettings={props.setServiceSettings}/>}/>
             </div>
         ) 
     }

@@ -9,7 +9,7 @@ export const OwnerScreen = (props: any) => {
        return (
             <div>
                 <SettingsItem 
-                title={props.text.CampSettings} 
+                title={props.text.CampSettings[props.leng]} 
                 body={<OwnerSettings {...props} />}/>
             </div>
         ) 
