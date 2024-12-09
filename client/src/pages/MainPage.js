@@ -55,14 +55,6 @@ function MainPage() {
     setValue(obj)
     return obj
   }
-  // createLisener('createNewOrder', async (data) => {
-  //   console.log(data.newOrder)
-  //   await app.greateOrder({...data.newOrder, complect: data.newOrder.complect.join(', '), view: data.newOrder.view.join(', ')})
-  //   .then(async (res) => {
-  //     setOrders([new OrderClass(res.data), ...data.orders])
-  //     setTimeout(() => setActive(0), 500)
-  //   })
-  // })
   createLisener('createNewOrderAndPrint', async (data) => {
     await app.greateOrder({
       ...data.newOrder, 
@@ -89,31 +81,31 @@ function MainPage() {
         getAppColor()
         getText()
         getFixServiceSettings()
-        getOrdersTimerUpdate()
+        // getOrdersTimerUpdate()
       }
     }
     navi()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const getOrdersTimerUpdate = async () => {
-        const interval = sessionStorage.getItem('interval')
-        if(interval){
-          clearInterval(Number(interval))
-        }
-        const int = setInterval(async () => {
-        if(sessionData('read', 'currentUser')){
-          const res = await app.getOrdersTime(navigate)
-          setOrders(res.sort((a, b) => b.date - a.date))
-          const ph = await app.getPhotosTime(navigate)
-          setPhotos(ph)
-        }
-        else{
-          // console.log('pause update orders')
-        }
-        sessionStorage.setItem('interval', int)
-      }, await app.timeUpdate())
-  }
+  // const getOrdersTimerUpdate = async () => {
+  //       const interval = sessionStorage.getItem('interval')
+  //       if(interval){
+  //         clearInterval(Number(interval))
+  //       }
+  //       const int = setInterval(async () => {
+  //       if(sessionData('read', 'currentUser')){
+  //         const res = await app.getOrdersTime(navigate)
+  //         setOrders(res.sort((a, b) => b.date - a.date))
+  //         const ph = await app.getPhotosTime(navigate)
+  //         setPhotos(ph)
+  //       }
+  //       else{
+  //         // console.log('pause update orders')
+  //       }
+  //       sessionStorage.setItem('interval', int)
+  //     }, await app.timeUpdate())
+  // }
 
   const getPhotos = async () => {
     const res = await app.getPhotos()
@@ -138,7 +130,7 @@ function MainPage() {
     document.title = 'ServiceXF ' + res.documents.namecomp.text
   }
   const getNavBar = async () => {
-    const res = await fixNavBarItems(text, leng)
+    const res = await fixNavBarItems(await app.getText(), leng)
     setNavBar(res)
   }
   const getAppColor = async () => {
