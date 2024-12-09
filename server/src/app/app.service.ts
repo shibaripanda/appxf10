@@ -13,7 +13,7 @@ export class AppService {
     @InjectModel('App') private appModel: Model<App>) {}
 
   async onApplicationBootstrap() {
-    // await this.updateAppText()
+    await this.updateAppText()
   }
 
   async getText(): Promise<NewLengPack>{
