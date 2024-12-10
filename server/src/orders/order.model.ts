@@ -59,6 +59,7 @@ export interface Order {
   model: string;
   firm: string;
   order: string;
+  status: string;
   problem: string;
   history: [];
   photos: []

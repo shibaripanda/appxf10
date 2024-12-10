@@ -8,6 +8,11 @@ import { BotService } from 'src/bot/bot.service';
 import { UsersService } from 'src/users/users.service';
 // import { UpdateOrderDto } from './dto/update-order.dto';
 
+interface FilterOrder {
+    title: Array<string>
+    status: Array<string>
+}
+
 @Injectable()
 export class OrdersService {
 
@@ -64,10 +69,11 @@ export class OrdersService {
         const orders = await this.orderModel.find({campId: {$in : [campId, ...subs]}, status: {$nin: ['close', 'cancel']}})
         return orders
     }
-    async getAllOrders(campId: string){
+    async getAllOrders(campId: string, filter: FilterOrder){
         const subs = await this.campService.getSubServices(campId)
-        const orders = await this.orderModel.find({campId: {$in : [campId, ...subs]}, status: {$nin: ['close', 'cancel']}})
-        return orders
+        const orders = await this.orderModel.find({campId: {$in : [campId, ...subs]}})
+        // console.log(filter)
+        return orders.filter(item => filter.title.includes(item.title) && filter.status.includes(item.status))
     }
     async updateOrder(id, obj){
         const order = await this.orderModel.findOneAndUpdate({_id: id}, obj, {returnDocument: 'after'})

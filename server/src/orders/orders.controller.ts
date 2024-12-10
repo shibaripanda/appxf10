@@ -29,10 +29,11 @@ export class OrdersController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get(':campId')
-    getAllOrders(@Param('campId') campId: string, @Request() req: any){
+    @Put(':campId')
+    getAllOrders(@Param('campId') campId: string, @Request() req: any, @Body() filter: any){
+        console.log(filter)
         if(req.user.campId.includes(campId)){
-            return this.ordersService.getAllOrders(campId)
+            return this.ordersService.getAllOrders(campId, filter)
         }
         return []
     }

@@ -11,6 +11,7 @@ export class AppClass {
         this.time = 5000
         this.link = getLink()
         this.campId = sessionData('read', 'campId')
+        this.dataFilter = []
     }
 
     async addSubCamp(obj){
@@ -69,7 +70,8 @@ export class AppClass {
         return sessionData('read', 'campId')
     }
     async fixServiceSettings(){
-        return (await axiosCall('GET', `${this.link}/api/getsettingscamp/${this.campId}`, {})).data
+        const res = (await axiosCall('GET', `${this.link}/api/getsettingscamp/${this.campId}`, {})).data
+        return res
     }
     async greateOrder(obj){
         return await axiosCall('POST', `${this.link}/api/orders`, obj)
@@ -109,8 +111,13 @@ export class AppClass {
     async deletePhotos(){
         await axiosCall('GET', `${this.link}/api/users/deletephotos/`, {})
     }
+    // async getOrders(){
+    //     const res = await axiosCall('GET', `${this.link}/api/orders/${this.campId}`, {})
+    //     return res.data.map(item => new OrderClass(item))
+    // }
     async getOrders(){
-        const res = await axiosCall('GET', `${this.link}/api/orders/${this.campId}`, {})
+        const filter = (await axiosCall('GET', `${this.link}/api/getsettingscamp/${this.campId}`, {})).data
+        const res = await axiosCall('PUT', `${this.link}/api/orders/${this.campId}`, {title: filter.userDeviceFilter, status: filter.userStatusFilter})
         return res.data.map(item => new OrderClass(item))
     }
     async getOrdersActiv(){
