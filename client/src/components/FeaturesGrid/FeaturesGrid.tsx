@@ -69,15 +69,28 @@ export function FeaturesGrid(props) {
                     />
             </Grid.Col>)}
             </Grid>
-            <Button onClick={
-                        () => {
-                        props.app.deletePhotos()
-                        props.setPhotos([])
-                    }} 
-                    style={{marginTop: '1vmax'}} 
-                    disabled={!props.photos.length}>
-                    Удалить фото
-                </Button>
+            <Grid>
+                <Grid.Col span={2}>
+                    <Button onClick={
+                            () => {
+                            props.getPhotos()
+                        }} 
+                        style={{marginTop: '1vmax'}}>
+                        Обновить
+                    </Button>
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <Button onClick={
+                            () => {
+                            props.app.deletePhotos()
+                            props.setPhotos([])
+                        }} 
+                        style={{marginTop: '1vmax'}} 
+                        disabled={!props.photos.length}>
+                        Удалить фото
+                    </Button>
+                </Grid.Col>
+            </Grid>
         </Container>
     )
 }

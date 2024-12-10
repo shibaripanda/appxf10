@@ -15,6 +15,7 @@ export const NewOrderScreen = (props) => {
                 value={props.value} 
                 setValue={props.setValue} 
                 serviceSettings={props.serviceSettings}
+                getPhotos={props.getPhotos}
             />
         ) 
     }

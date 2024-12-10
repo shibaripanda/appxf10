@@ -109,6 +109,7 @@ function MainPage() {
 
   const getPhotos = async () => {
     const res = await app.getPhotos()
+    console.log(res)
     setPhotos(res ? res : [])
   }
 
@@ -144,7 +145,7 @@ function MainPage() {
       
       const listScreens = [
         <ServiceScreen leng={leng} app={app} getOrders={getOrders} text={text} orders={orders} setOrders={setOrders} filter={filter} serviceSettings={serviceSettings} newSet={newSet} textFilter={textFilter}/>,
-        <NewOrderScreen leng={leng} setPhotos={setPhotos} app={app} photos={photos} getOrders={getOrders} orders={orders} defaultValue={defaultValue} value={value} setValue={setValue} serviceSettings={serviceSettings}/>,
+        <NewOrderScreen getPhotos={getPhotos} leng={leng} setPhotos={setPhotos} app={app} photos={photos} getOrders={getOrders} orders={orders} defaultValue={defaultValue} value={value} setValue={setValue} serviceSettings={serviceSettings}/>,
         <SettingsScreen leng={leng} app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
         <GroupUsersScreen leng={leng} app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
         <AdminScreen leng={leng} app={app} text={text} serviceSettings={serviceSettings} setServiceSettings={setServiceSettings}/>,
