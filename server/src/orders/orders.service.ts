@@ -66,7 +66,7 @@ export class OrdersService {
     }
     async getAllOrders(campId: string){
         const subs = await this.campService.getSubServices(campId)
-        const orders = await this.orderModel.find({campId: {$in : [campId, ...subs]}})
+        const orders = await this.orderModel.find({campId: {$in : [campId, ...subs]}, status: {$nin: ['close', 'cancel']}})
         return orders
     }
     async updateOrder(id, obj){

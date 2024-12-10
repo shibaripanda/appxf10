@@ -83,8 +83,9 @@ export function OpenOrder(props: any) {
             color: 'red',
             func: async () =>  {
               await props.data.deleteOrder()
+              await props.getOrders()
               props.close()
-              props.getOrders()
+              
             }
           },
           {title: 'Назад',

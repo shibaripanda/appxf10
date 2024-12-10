@@ -66,6 +66,8 @@ function MainPage() {
     .then(async (res) => {
       setOrders([new OrderClass(res.data), ...data.orders])
       setTimeout(() => setActive(0), 7000)
+      app.deletePhotos()
+      setPhotos([])
     })
   })
   useEffect(() => {
