@@ -72,7 +72,6 @@ export class OrdersService {
     async getAllOrders(campId: string, filter: FilterOrder){
         const subs = await this.campService.getSubServices(campId)
         const orders = await this.orderModel.find({campId: {$in : [campId, ...subs]}})
-        // console.log(filter)
         return orders.filter(item => filter.title.includes(item.title) && filter.status.includes(item.status))
     }
     async updateOrder(id, obj){

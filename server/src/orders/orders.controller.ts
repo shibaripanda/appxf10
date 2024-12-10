@@ -29,9 +29,9 @@ export class OrdersController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put(':campId')
+    @Put('/or/:campId')
     getAllOrders(@Param('campId') campId: string, @Request() req: any, @Body() filter: any){
-        console.log(filter)
+        console.log('sss')
         if(req.user.campId.includes(campId)){
             return this.ordersService.getAllOrders(campId, filter)
         }
@@ -56,6 +56,7 @@ export class OrdersController {
     @UseGuards(JwtAuthGuard)
     @Put(':orderId')
     updateOrder(@Body() orderDto: CreateOrderDto, @Param('orderId') orderId: string){
+        console.log('ddd')
         return this.ordersService.updateOrder(orderId, orderDto)
     }
 }

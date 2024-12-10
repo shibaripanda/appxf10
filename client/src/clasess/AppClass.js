@@ -117,7 +117,8 @@ export class AppClass {
     // }
     async getOrders(){
         const filter = (await axiosCall('GET', `${this.link}/api/getsettingscamp/${this.campId}`, {})).data
-        const res = await axiosCall('PUT', `${this.link}/api/orders/${this.campId}`, {title: filter.userDeviceFilter, status: filter.userStatusFilter})
+        const res = await axiosCall('PUT', `${this.link}/api/orders/or/${this.campId}`, {title: filter.userDeviceFilter, status: filter.userStatusFilter})
+        console.log(res.data.length)
         return res.data.map(item => new OrderClass(item))
     }
     async getOrdersActiv(){
