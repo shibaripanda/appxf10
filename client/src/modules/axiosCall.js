@@ -7,6 +7,6 @@ export const axiosCall = async (typeRequest, link, objectUpdate) => {
         url: link,
         data: objectUpdate,
         headers: {'Authorization': 'Bearer ' + sessionData('read', 'token')},
-        timeout: 10000
+        timeout: 50000
     })
 }
