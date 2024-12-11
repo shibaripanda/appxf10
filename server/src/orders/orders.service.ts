@@ -70,9 +70,12 @@ export class OrdersService {
         return orders
     }
     async getAllOrders(campId: string, filter: FilterOrder){
+        const time = Date.now()
         const subs = await this.campService.getSubServices(campId)
         const orders = await this.orderModel.find({campId: {$in : [campId, ...subs]}})
-        return orders.filter(item => filter.title.includes(item.title) && filter.status.includes(item.status))
+        const res = orders.filter(item => filter.title.includes(item.title) && filter.status.includes(item.status))
+        console.log('getOrdersTime', (Date.now() - time) / 1000)
+        return res
     }
     async updateOrder(id, obj){
         const order = await this.orderModel.findOneAndUpdate({_id: id}, obj, {returnDocument: 'after'})
