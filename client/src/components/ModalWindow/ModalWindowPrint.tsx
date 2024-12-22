@@ -10,10 +10,11 @@ export function ModalWindowPrint(props) {
   const [order, setOrder] = useState(false)
 
   const openOrderModal = async () => {
+    open()
     const order = await props.handler()
     setTimeout(() => setOrder(order), 500)
     
-    open()
+    
   }
 
   const loadPrint = () => {
