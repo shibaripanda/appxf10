@@ -111,14 +111,12 @@ function MainPage() {
 
   const getPhotos = async () => {
     const res = await app.getPhotos()
-    console.log(res)
     setPhotos(res ? res : [])
   }
 
   const getOrders = async () => {
     // console.log(await app.getOrdersActiv())
     const res = await app.getOrders()
-    console.log(res[0])
     setOrders(res.sort((a, b) => b.date - a.date))
   }
   const getText = async () => {

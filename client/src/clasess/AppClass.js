@@ -118,12 +118,12 @@ export class AppClass {
     async getOrders(){
         const time = Date.now()
         const filter = (await axiosCall('GET', `${this.link}/api/getsettingscamp/${this.campId}`, {})).data
-        console.log('1', (Date.now() - time) / 1000)
+        console.log((Date.now() - time) / 1000)
         const res = await axiosCall('PUT', `${this.link}/api/orders/or/${this.campId}`, {title: filter.userDeviceFilter, status: filter.userStatusFilter})
-        console.log('2', (Date.now() - time) / 1000)
+        console.log((Date.now() - time) / 1000)
         console.log(res.data.length)
         const result = res.data.map(item => new OrderClass(item))
-        console.log('3', (Date.now() - time) / 1000)
+        console.log((Date.now() - time) / 1000)
         return result
     }
     async getOrdersActiv(){

@@ -13,8 +13,6 @@ import { sessionData } from '../modules/sessionData';
 
 
 export const fixNavBarItems = async (text, leng) => {
-  console.log(text)
-  console.log(leng)
 
     return {
       top: [
