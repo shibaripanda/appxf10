@@ -7,12 +7,12 @@ import { LoaderItem } from '../Loader/LoaderItem.tsx'
 export function ModalWindowPrint(props) {
     
   const [opened, { open, close }] = useDisclosure(false)
-  const [order, setOrder] = useState(false)
+  const [order, setOrder] = useState(props.data)
 
   const openOrderModal = async () => {
     open()
     const order = await props.handler()
-    setTimeout(() => setOrder(order), 500)
+    // setTimeout(() => setOrder(order), 500)
     
     
   }

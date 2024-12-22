@@ -27,7 +27,9 @@ export function OpenOrder(props: any) {
     const historyUpdate = async (text, status) => {
       const res = await props.data.updateHistory(text, status)
       await props.getOrders()
-      return res
+      // props.data.updateHistory(text, status)
+      // props.getOrders()
+      // return res
     }
     const serviceUpdate = async (service) => {
       await props.data.addNewService(service)
