@@ -27,7 +27,7 @@ export class AuthService {
         if(user){
             const code = rendomNumberOrder()
             await this.usersService.updateUser({_id: user._id}, {emailAuthCode: {code: String(code), time: Date.now(), step: 1, name: false}})
-            await sendEmail(user.email, 'Временный пароль: ', String(code))
+            // await sendEmail(user.email, 'Временный пароль: ', String(code))
             return `Check ${userDto.email} for password`
         }
         else{
